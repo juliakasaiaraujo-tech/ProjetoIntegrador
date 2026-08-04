@@ -114,66 +114,68 @@
   </section>
 
   <!-- ANALOGIAS -->
-  <section class="section" id="analogias" style="padding-top:0">
-    <div class="wrap">
-      <p class="sec-tag">Experimentos clássicos</p>
-      <h2 class="sec-title">Analogias que explicam a luz</h2>
-      <div class="analogias">
-        <div class="card analogias-col disco-area reveal">
-          <h3>Disco de Newton</h3>
-          <p>Ao girar rapidamente, as cores do espectro se misturam e o disco tende ao branco — mostrando que a luz branca é a soma de várias cores (energia em diferentes comprimentos de onda).</p>
-          <div class="disco-wrap"><div class="disco" id="disco"></div></div>
-          <button class="btn btn-teal" id="btn-disco">▶ Girar o disco</button>
-        </div>
-        <figure class="figura reveal">
-          <h3 style="margin-bottom:.8rem">Câmara Escura</h3>
-          <svg viewBox="0 0 520 240" role="img" aria-label="Diagrama de uma câmara escura: a luz de uma vela passa por um pequeno orifício e projeta uma imagem invertida na parede oposta.">
-            <rect x="150" y="20" width="350" height="200" rx="10" fill="#06333a"/>
-            <rect x="150" y="20" width="350" height="200" rx="10" fill="none" stroke="#1fc2ce" stroke-width="2"/>
-            <rect x="146" y="112" width="9" height="16" fill="#f2fbfc"/>
-            <rect x="70" y="120" width="16" height="60" rx="3" fill="#ffd9a8"/>
-            <path d="M78 96 C70 108 72 116 78 120 C84 116 86 108 78 96Z" fill="#ff8a3d"/>
-            <line x1="78" y1="100" x2="150" y2="120" stroke="#9deef3" stroke-width="1.5"/>
-            <line x1="150" y1="120" x2="466" y2="206" stroke="#9deef3" stroke-width="1.5"/>
-            <line x1="86" y1="180" x2="150" y2="122" stroke="#9deef3" stroke-width="1.5" opacity=".7"/>
-            <line x1="150" y1="122" x2="466" y2="60" stroke="#9deef3" stroke-width="1.5" opacity=".7"/>
-            <rect x="458" y="130" width="14" height="52" rx="3" fill="#ffd9a8" opacity=".85"/>
-            <path d="M465 190 C458 199 460 205 465 208 C470 205 472 199 465 190Z" fill="#ff8a3d" opacity=".85"/>
-          </svg>
-          <figcaption>A luz se propaga em linha reta: atravessando um pequeno orifício, ela projeta uma imagem invertida na parede oposta — princípio básico da formação de imagens.</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACESSIBILIDADE UNIVERSAL -->
-  <section class="section" id="acessibilidade" style="padding-top:0">
-    <div class="wrap">
-      <p class="sec-tag">Desenho universal</p>
-      <h2 class="sec-title">Ciência também é incluir</h2>
-      <div class="grid g2" style="margin-top:1.6rem">
-        <div class="painel reveal">
-          <p class="painel-rotulo">Princípios aplicados ao projeto</p>
-          <ul style="margin-left:1.1rem;color:#eafcff;display:grid;gap:.55rem">
-            <li><strong>Uso equitativo</strong> — a piscina serve a todos os corpos e mobilidades.</li>
-            <li><strong>Flexibilidade</strong> — rampa e painel atendem diferentes usuários.</li>
-            <li><strong>Simples e intuitivo</strong> — interface do display fácil de entender.</li>
-            <li><strong>Informação perceptível</strong> — indicações visuais e textuais claras.</li>
-          </ul>
-        </div>
-        <div class="card reveal">
-          <h3>Onde isso aparece no sistema</h3>
-          <p style="margin-top:.6rem">
-            Na <strong>rampa motorizada</strong> acionada por sensor de presença, no
-            <strong>display OLED</strong> com números grandes e alto contraste, e no
-            funcionamento automático, que não exige força ou precisão do usuário.
-            Conforto térmico também é acessibilidade: água fria pode excluir pessoas com
-            sensibilidade ao frio.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+ <figure class="figura reveal">
+  <h3 style="margin-bottom:.8rem">Câmara Escura</h3>
+  <div style="position:relative;background:#0a1a1d;border-radius:12px;padding:1.5rem;overflow:hidden">
+    <svg viewBox="0 0 520 280" style="width:100%;height:auto;display:block" role="img" aria-label="Animação da câmara escura: a luz da vela passa por um orifício e projeta a imagem invertida na parede oposta.">
+      <!-- Caixa preta (câmara) -->
+      <rect x="150" y="30" width="350" height="220" rx="8" fill="#04333a" stroke="#1fc2ce" stroke-width="2"/>
+      
+      <!-- Orifício (entrada de luz) -->
+      <rect x="148" y="120" width="6" height="20" fill="#f2fbfc"/>
+      
+      <!-- Vela externa -->
+      <g>
+        <rect x="75" y="140" width="14" height="50" rx="2" fill="#ffe4c4" stroke="#8b6f47" stroke-width="1"/>
+        <path d="M82 110 C74 122 76 132 82 138 C88 132 90 122 82 110Z" fill="#ff8a3d">
+          <animate attributeName="opacity" values="0.9;1;0.9" dur="1.2s" repeatCount="indefinite"/>
+        </path>
+        <ellipse cx="82" cy="108" rx="6" ry="3" fill="#ffd27a" opacity="0.6">
+          <animate attributeName="opacity" values="0.4;0.7;0.4" dur="1s" repeatCount="indefinite"/>
+        </ellipse>
+      </g>
+      
+      <!-- Raios de luz entrando -->
+      <g stroke="#9deef3" stroke-width="1.8" opacity="0.85">
+        <line x1="82" y1="120" x2="150" y2="128" stroke-dasharray="4 3">
+          <animate attributeName="stroke-dashoffset" from="7" to="0" dur="1.5s" repeatCount="indefinite"/>
+        </line>
+        <line x1="150" y1="128" x2="470" y2="218" stroke-dasharray="4 3">
+          <animate attributeName="stroke-dashoffset" from="7" to="0" dur="1.5s" repeatCount="indefinite"/>
+        </line>
+        
+        <line x1="90" y1="185" x2="150" y2="132" stroke-dasharray="4 3">
+          <animate attributeName="stroke-dashoffset" from="7" to="0" dur="1.8s" repeatCount="indefinite"/>
+        </line>
+        <line x1="150" y1="132" x2="470" y2="70" stroke-dasharray="4 3">
+          <animate attributeName="stroke-dashoffset" from="7" to="0" dur="1.8s" repeatCount="indefinite"/>
+        </line>
+        
+        <line x1="78" y1="150" x2="150" y2="130" stroke-dasharray="3 4">
+          <animate attributeName="stroke-dashoffset" from="7" to="0" dur="2s" repeatCount="indefinite"/>
+        </line>
+        <line x1="150" y1="130" x2="470" y2="150" stroke-dasharray="3 4">
+          <animate attributeName="stroke-dashoffset" from="7" to="0" dur="2s" repeatCount="indefinite"/>
+        </line>
+      </g>
+      
+      <!-- Imagem invertida projetada (vela invertida) -->
+      <g transform="translate(440, 80)">
+        <rect x="0" y="0" width="14" height="50" rx="2" fill="#ffe4c4" stroke="#8b6f47" stroke-width="1" opacity="0.9"/>
+        <path d="M7 -20 C-1 -8 1 2 7 8 C13 2 15 -8 7 -20Z" fill="#ff8a3d" opacity="0.85">
+          <animate attributeName="opacity" values="0.7;0.9;0.7" dur="1.2s" repeatCount="indefinite"/>
+        </path>
+        <text x="-15" y="75" fill="#9deef3" font-size="11" font-family="monospace">invertida</text>
+      </g>
+      
+      <!-- Legendas -->
+      <text x="30" y="210" fill="#7fcdd3" font-size="12" font-family="sans-serif">Vela</text>
+      <text x="100" y="110" fill="#ffd27a" font-size="11" font-family="monospace">raios de luz</text>
+      <text x="280" y="270" fill="#9deef3" font-size="11" font-family="monospace">→ luz viaja em linha reta →</text>
+    </svg>
+  </div>
+  <figcaption>A luz se propaga em linha reta: atravessando um pequeno orifício, ela projeta uma imagem invertida na parede oposta. Este é o princípio básico da formação de imagens — o mesmo usado em câmeras fotográficas.</figcaption>
+</figure>
 
   <!-- CÁLCULOS -->
   <section class="section" id="calculos" style="padding-top:0">
