@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desenvolvimento · Aqua+ — Projeto Integrador CEP</title>
+<meta name="description" content="As 4 etapas do projeto: início, montagem e simulação, ajustes e versão final — além dos desafios e soluções encontrados pela equipe.">
+<meta name="theme-color" content="#04333a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;700&family=Unbounded:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 3C13 12 8 18.5 8 25a12 12 0 0 0 24 0c0-6.5-5-13-12-22Z" fill="#1fc2ce"/>
+        <path d="M13 26c2 0 2.5 1.6 4.5 1.6S20 26 22 26s2.5 1.6 4.5 1.6" stroke="#04333a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-text">Aqua+<small>Projeto Integrador · CEP</small></span>
+    </a>
+    <nav class="menu" aria-label="Navegação principal">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="tecnociencia.html">Tecnociência</a></li>
+        <li><a href="robotica.html">Robótica</a></li>
+        <li><a href="programacao.html">Programação</a></li>
+        <li><a href="desenvolvimento.html" class="active" aria-current="page">Desenvolvimento</a></li>
+        <li><a href="resultados.html">Resultados</a></li>
+        <li><a href="equipe.html">Equipe</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="page-hero">
+    <span class="ghost" aria-hidden="true">05</span>
+    <div class="wrap">
+      <p class="mod">Módulo 05 · Desenvolvimento</p>
+      <h1>Da ideia à versão final, etapa por etapa</h1>
+      <p class="hero-sub">Pesquisa, montagem, simulação, ajustes e testes: o caminho completo do projeto — com os desafios e as soluções pelo caminho.</p>
+    </div>
+    <div class="waves" aria-hidden="true">
+      <svg class="w1" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 62 C 240 108 480 18 720 48 C 960 78 1200 26 1440 66 L 1440 120 L 0 120 Z" fill="rgba(157,238,243,.12)"/></svg>
+      <svg class="w2" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 84 C 260 36 520 104 780 74 C 1040 44 1240 96 1440 58 L 1440 120 L 0 120 Z" fill="#f2fbfc"/></svg>
+    </div>
+  </section>
+
+  <!-- LINHA DO TEMPO -->
+  <section class="section" id="etapas">
+    <div class="wrap">
+      <p class="sec-tag">Linha do tempo</p>
+      <h2 class="sec-title">As 4 etapas do projeto</h2>
+
+      <div class="timeline">
+        <article class="t-item reveal">
+          <div class="t-head"><span class="t-badge">ETAPA 1</span><h3>Início do projeto</h3></div>
+          <p>
+            O grupo analisou situações do cotidiano escolar e identificou a limitação no controle
+            da temperatura da piscina como um problema relevante. Foram realizadas pesquisas sobre
+            sensores de temperatura, automação e soluções existentes. Em reuniões, definimos a ideia
+            central: um sistema que combine aquecimento da piscina com recursos de acessibilidade,
+            considerando também a sustentabilidade — um protótipo com sensores de temperatura,
+            controlado por Arduino, com alertas sonoros e visuais para pessoas com deficiência.
+            As tarefas foram divididas e os primeiros esboços, elaborados.
+          </p>
+        </article>
+
+        <article class="t-item reveal">
+          <div class="t-head"><span class="t-badge">ETAPA 2</span><h3>Montagem e simulação</h3></div>
+          <p>
+            Iniciamos o desenvolvimento prático: montagem da estrutura base, testes com Arduino e
+            sensores de temperatura, e programação inicial para leitura de dados. Em seguida, o
+            projeto evoluiu com a <strong>simulação do circuito no Tinkercad</strong> e o
+            desenvolvimento da programação para exibição das informações no display OLED. Essas
+            etapas permitiram validar o funcionamento, identificar ajustes necessários e reduzir
+            riscos antes da implementação física.
+          </p>
+        </article>
+
+        <article class="t-item reveal">
+          <div class="t-head"><span class="t-badge">ETAPA 3</span><h3>Ajustes e melhorias</h3></div>
+          <p>
+            Realizamos ajustes importantes: recalibração dos sensores de temperatura, correção de
+            conexões no Arduino, substituição de sensores com falhas e revisão do código para
+            eliminar bugs. Circuito e programação foram aprimorados — melhorias na leitura dos
+            dados, no acionamento do relé e na estabilidade geral. Esses testes e correções foram
+            essenciais para aumentar a confiabilidade do protótipo.
+          </p>
+        </article>
+
+        <article class="t-item reveal">
+          <div class="t-head"><span class="t-badge">ETAPA 4</span><h3>Versão final</h3></div>
+          <p>Consolidamos todo o trabalho das etapas anteriores na versão completa do sistema:</p>
+          <ul class="t-list">
+            <li>Sistema de aquecimento solar integrado com sensores de temperatura</li>
+            <li>Plataforma de acessibilidade com rampa motorizada</li>
+            <li>Painel de controle unificado com interface intuitiva</li>
+            <li>Estrutura finalizada e esteticamente apresentável</li>
+          </ul>
+          <p style="margin-top:1rem"><strong>Testes finais realizados:</strong></p>
+          <ul class="t-list">
+            <li><strong>Aquecimento:</strong> verificação da eficiência térmica</li>
+            <li><strong>Acessibilidade:</strong> funcionamento da rampa e segurança</li>
+            <li><strong>Integração:</strong> comunicação entre todos os componentes</li>
+            <li><strong>Durabilidade:</strong> resistência dos materiais à água</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESAFIOS -->
+  <section class="section" id="desafios" style="padding-top:0">
+    <div class="wrap">
+      <p class="sec-tag">Desafios e soluções</p>
+      <h2 class="sec-title">O que deu errado — e como resolvemos</h2>
+      <div class="grid" style="margin-top:1.8rem;gap:1.1rem">
+        <div class="d-card reveal">
+          <div class="d-l d-desafio"><span class="d-titulo">⚠ Desafio</span><p>Calibrar os sensores de temperatura para o aquecimento da piscina.</p></div>
+          <div class="d-l d-solucao"><span class="d-titulo">✓ Solução</span><p>Múltiplos testes de medição até alcançar a precisão adequada.</p></div>
+        </div>
+        <div class="d-card reveal">
+          <div class="d-l d-desafio"><span class="d-titulo">⚠ Desafio</span><p>Adaptar os componentes para garantir uso universal e acessível.</p></div>
+          <div class="d-l d-solucao"><span class="d-titulo">✓ Solução</span><p>Criatividade e pesquisa em normas e princípios de acessibilidade.</p></div>
+        </div>
+        <div class="d-card reveal">
+          <div class="d-l d-desafio"><span class="d-titulo">⚠ Desafio</span><p>Erros e bugs no código do Arduino durante os testes.</p></div>
+          <div class="d-l d-solucao"><span class="d-titulo">✓ Solução</span><p>Revisão cuidadosa do código e consulta a tutoriais e documentações.</p></div>
+        </div>
+        <div class="d-card reveal">
+          <div class="d-l d-desafio"><span class="d-titulo">⚠ Desafio</span><p>Integrar três áreas diferentes: Robótica, Tecnociência e Programação.</p></div>
+          <div class="d-l d-solucao"><span class="d-titulo">✓ Solução</span><p>Trabalho colaborativo e persistência — cada obstáculo foi superado em equipe.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div>
+          <h2>E o resultado de tudo isso?</h2>
+          <p>Veja a avaliação final do projeto, as aplicações futuras e o que aprendemos.</p>
+        </div>
+        <a class="btn btn-solid" href="resultados.html" style="position:relative;z-index:2">Ver resultados →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand">Aqua+ 💧</p>
+      <p>Tecnologia aplicada à acessibilidade: sistema de aquecimento automatizado para piscinas.</p>
+    </div>
+    <nav aria-label="Mapa do site">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="tecnociencia.html">Tecnociência</a></li>
+        <li><a href="robotica.html">Robótica</a></li>
+        <li><a href="programacao.html">Programação</a></li>
+        <li><a href="desenvolvimento.html">Desenvolvimento</a></li>
+        <li><a href="resultados.html">Resultados</a></li>
+        <li><a href="equipe.html">Equipe</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p><strong>Equipe</strong><br>Julia Saory · Maria Fernanda · Luiza Brandão</p>
+      <p><strong>Colégio Estadual do Paraná</strong><br>Projeto Integrador · <span id="ano">2026</span></p>
+    </div>
+  </div>
+  <div class="wrap footer-base"><p>Feito com 💧, ciência e trabalho em equipe.</p></div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
