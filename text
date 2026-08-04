@@ -1,0 +1,10 @@
+pasta-do-site/
+├── index.html
+├── tecnociencia.html
+├── robotica.html
+├── programacao.html
+├── desenvolvimento.html
+├── resultados.html
+├── equipe.html
+├── css/estilo.css
+└── js/script.js
