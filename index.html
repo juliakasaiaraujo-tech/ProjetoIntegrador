@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Início · Aqua+ — Aquecimento Automatizado e Acessibilidade | Projeto Integrador CEP</title>
+<meta name="description" content="Sistema automatizado de aquecimento com foco em acessibilidade para a piscina do Colégio Estadual do Paraná — Projeto Integrador de Robótica, Tecnociência e Programação.">
+<meta name="theme-color" content="#04333a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;700&family=Unbounded:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 3C13 12 8 18.5 8 25a12 12 0 0 0 24 0c0-6.5-5-13-12-22Z" fill="#1fc2ce"/>
+        <path d="M13 26c2 0 2.5 1.6 4.5 1.6S20 26 22 26s2.5 1.6 4.5 1.6" stroke="#04333a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-text">Aqua+<small>Projeto Integrador · CEP</small></span>
+    </a>
+    <nav class="menu" aria-label="Navegação principal">
+      <ul>
+        <li><a href="index.html" class="active" aria-current="page">Início</a></li>
+        <li><a href="tecnociencia.html">Tecnociência</a></li>
+        <li><a href="robotica.html">Robótica</a></li>
+        <li><a href="programacao.html">Programação</a></li>
+        <li><a href="desenvolvimento.html">Desenvolvimento</a></li>
+        <li><a href="resultados.html">Resultados</a></li>
+        <li><a href="equipe.html">Equipe</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">🤖 Robótica · 🔬 Tecnociência · 💻 Programação</p>
+        <h1 class="hero-title">Água quentinha, piscina <em>para todo mundo</em>.</h1>
+        <p class="hero-sub">
+          Sistema automatizado de aquecimento com foco em acessibilidade para a piscina do
+          Colégio Estadual do Paraná: sensores medem, o Arduino decide e ninguém fica de fora
+          das atividades aquáticas.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#contexto">Entenda o problema ↓</a>
+          <a class="btn btn-line" href="desenvolvimento.html">Ver as etapas</a>
+        </div>
+        <div class="hero-disc">
+          <a class="chip-disc" href="tecnociencia.html">🔬 Tecnociência</a>
+          <a class="chip-disc" href="robotica.html">🤖 Robótica</a>
+          <a class="chip-disc" href="programacao.html">💻 Programação</a>
+        </div>
+      </div>
+      <div class="hero-painel">
+        <div class="oled" aria-label="Simulação do painel do sistema: temperatura da piscina em torno de 27 graus, alvo de 30 graus, relé em espera e rampa pronta.">
+          <div class="oled-head"><span>PISCINA CEP · MONITOR</span><span>ARDUINO UNO</span></div>
+          <p class="oled-temp"><span data-oled-temp>27.4</span>°C</p>
+          <p class="oled-line"><span>ALVO</span><span>30.0 °C</span></p>
+          <p class="oled-line"><span>RELÉ</span><span class="standby">EM ESPERA</span></p>
+          <p class="oled-line"><span>RAMPA</span><span class="ok">PRONTA ✓</span></p>
+          <p class="oled-status">monitorando…<span class="cursor">▊</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="waves" aria-hidden="true">
+      <svg class="w1" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 62 C 240 108 480 18 720 48 C 960 78 1200 26 1440 66 L 1440 120 L 0 120 Z" fill="rgba(157,238,243,.14)"/></svg>
+      <svg class="w2" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 84 C 260 36 520 104 780 74 C 1040 44 1240 96 1440 58 L 1440 120 L 0 120 Z" fill="#f2fbfc"/></svg>
+    </div>
+  </section>
+
+  <!-- NÚMEROS -->
+  <div class="stats">
+    <div class="wrap">
+      <div class="stats-grid">
+        <div class="stat reveal"><b><span class="num" data-count="4282.8" data-dec="1">0</span> m³</b><span>volume de água calculado da piscina</span></div>
+        <div class="stat reveal"><b><span class="num" data-count="268.8" data-dec="1">0</span> GJ</b><span>energia para aquecer de 20 °C a 35 °C</span></div>
+        <div class="stat reveal"><b>R$ 90–155</b><span>custo estimado do protótipo em escala</span></div>
+        <div class="stat reveal"><b><span class="num" data-count="4">0</span> etapas</b><span>da ideia inicial até a versão final</span></div>
+      </div>
+      <p class="nota">*Números calculados pela equipe no relatório do projeto (página 18).</p>
+    </div>
+  </div>
+
+  <!-- TEMA E CONTEXTO -->
+  <section class="section" id="contexto">
+    <div class="wrap split">
+      <div>
+        <p class="sec-tag">Tema e contexto</p>
+        <h2 class="sec-title">Um problema real, dentro da nossa escola</h2>
+        <p>
+          Atualmente, no Colégio Estadual do Paraná, a piscina não possui um sistema eficiente
+          de regulação térmica — os ajustes são feitos <strong>manualmente e de forma imprecisa</strong>.
+        </p>
+        <p style="margin-top:1rem">
+          Isso afeta diretamente alunos com maior sensibilidade ao frio, gerando desconforto,
+          dificuldade de adaptação ao ambiente aquático e, em alguns casos, até a
+          <strong>exclusão de atividades</strong>.
+        </p>
+        <p style="margin-top:1rem">
+          Diante desse cenário, propusemos uma solução tecnológica acessível, com potencial de
+          aplicação prática dentro da própria escola: mais conforto térmico, mais inclusão e
+          melhor aproveitamento pedagógico das atividades aquáticas.
+        </p>
+      </div>
+      <div class="painel reveal">
+        <p class="painel-rotulo">O problema em uma frase</p>
+        <p style="font-size:1.25rem;line-height:1.5;color:#fff">
+          “Sem controle preciso de temperatura, a piscina deixa de ser um espaço de
+          aprendizagem para alguns estudantes.”
+        </p>
+        <p style="margin-top:1.2rem;font-size:.92rem">
+          Nossa resposta: automação com Arduino + acessibilidade com rampa motorizada +
+          ciência aplicada para aquecer com eficiência.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJETIVOS -->
+  <section class="section" id="objetivos" style="padding-top:0">
+    <div class="wrap">
+      <p class="sec-tag">Onde queremos chegar</p>
+      <h2 class="sec-title">Objetivos do projeto</h2>
+      <div class="grid" style="margin-top:1.6rem">
+        <div class="painel reveal">
+          <p class="painel-rotulo">Objetivo geral</p>
+          <p style="font-size:1.12rem;color:#fff">
+            Desenvolver um sistema integrado que combine soluções de acessibilidade e
+            aquecimento para piscinas, utilizando conhecimentos de robótica, tecnociência e
+            programação para criar uma solução funcional e sustentável.
+          </p>
+        </div>
+        <div class="grid g3">
+          <div class="card reveal"><span class="ico" aria-hidden="true">♿</span>
+            <h3>Acessibilidade</h3>
+            <p>Projetar mecanismos que facilitem o acesso à piscina para pessoas com mobilidade reduzida.</p>
+          </div>
+          <div class="card reveal"><span class="ico" aria-hidden="true">🌡️</span>
+            <h3>Aquecimento eficiente</h3>
+            <p>Implementar um sistema de aquecimento eficiente utilizando sensores e automação.</p>
+          </div>
+          <div class="card reveal"><span class="ico" aria-hidden="true">💻</span>
+            <h3>Controle e monitoramento</h3>
+            <p>Integrar programação para controle e monitoramento do sistema em tempo real.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JUSTIFICATIVA -->
+  <section class="section" id="justificativa" style="padding-top:0">
+    <div class="wrap split">
+      <div>
+        <p class="sec-tag">Justificativa</p>
+        <h2 class="sec-title">Por que este projeto importa?</h2>
+        <p>
+          O projeto atende a necessidades reais do ambiente escolar, unindo
+          <strong>acessibilidade, sustentabilidade e aprendizado prático</strong>.
+          Ao automatizar o controle da temperatura, proporciona maior conforto aos alunos —
+          inclusive aqueles com mobilidade reduzida — e melhora a eficiência energética,
+          aquecendo a água apenas quando necessário.
+        </p>
+        <p style="margin-top:1rem">
+          Além disso, permite aplicar conhecimentos de robótica, programação e física,
+          conectando teoria e prática. E pode ser replicado em outros espaços, promovendo
+          inclusão social e consciência ambiental.
+        </p>
+      </div>
+      <ul class="checklist">
+        <li class="reveal"><span class="ok" aria-hidden="true">♿</span><div><strong>Inclusão e conforto</strong><br>Água na temperatura certa para todos os corpos e sensibilidades.</div></li>
+        <li class="reveal"><span class="ok" aria-hidden="true">⚡</span><div><strong>Eficiência energética</strong><br>O aquecedor só funciona quando a temperatura pede.</div></li>
+        <li class="reveal"><span class="ok" aria-hidden="true">🛠️</span><div><strong>Aprender fazendo</strong><br>Robótica, programação e física trabalhando juntas.</div></li>
+        <li class="reveal"><span class="ok" aria-hidden="true">🔁</span><div><strong>Solução replicável</strong><br>Baixo custo: aplicável em outras escolas e espaços.</div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- DISCIPLINAS -->
+  <section class="section" id="disciplinas" style="padding-top:0">
+    <div class="wrap">
+      <p class="sec-tag">Integração das disciplinas</p>
+      <h2 class="sec-title">Três áreas, uma solução</h2>
+      <div class="grid g3" style="margin-top:1.6rem">
+        <div class="card reveal">
+          <span class="ico" aria-hidden="true">🔬</span>
+          <h3>Tecnociência</h3>
+          <ul>
+            <li>Transferência de calor e eficiência energética</li>
+            <li>Óptica: absorção, reflexão e refração</li>
+            <li>Disco de Newton e Câmara Escura</li>
+            <li>Cálculos de área, volume e energia</li>
+          </ul>
+          <a class="card-link" href="tecnociencia.html">Explorar módulo →</a>
+        </div>
+        <div class="card reveal">
+          <span class="ico" aria-hidden="true">🤖</span>
+          <h3>Robótica</h3>
+          <ul>
+            <li>Arduino, sensores, relé e display</li>
+            <li>Rampa motorizada de acessibilidade</li>
+            <li>Protótipo em escala reduzida (5 litros)</li>
+            <li>Estrutura com materiais recicláveis</li>
+          </ul>
+          <a class="card-link" href="robotica.html">Explorar módulo →</a>
+        </div>
+        <div class="card reveal">
+          <span class="ico" aria-hidden="true">💻</span>
+          <h3>Programação</h3>
+          <ul>
+            <li>Lógica de controle automatizado</li>
+            <li>Código do Arduino (IDE)</li>
+            <li>Site de documentação (HTML/CSS/JS)</li>
+            <li>Apresentação no Canva</li>
+          </ul>
+          <a class="card-link" href="programacao.html">Explorar módulo →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERIAIS -->
+  <section class="section" id="materiais" style="padding-top:0">
+    <div class="wrap split">
+      <div>
+        <p class="sec-tag">Materiais e ferramentas</p>
+        <h2 class="sec-title">Com o que construímos</h2>
+        <p><strong>Componentes do protótipo</strong></p>
+        <div style="margin:.6rem 0 1.4rem">
+          <span class="tag">Arduino / microcontrolador</span>
+          <span class="tag">Sensor de temperatura</span>
+          <span class="tag">Sensor de presença</span>
+          <span class="tag">Relé 5V</span>
+          <span class="tag">Display OLED</span>
+          <span class="tag">Motores e atuadores</span>
+          <span class="tag">Protoboard e cabos</span>
+          <span class="tag">Recipiente de 5 L</span>
+          <span class="tag">Materiais recicláveis</span>
+        </div>
+        <p><strong>Softwares</strong></p>
+        <div style="margin-top:.6rem">
+          <span class="tag">IDE Arduino</span>
+          <span class="tag">Tinkercad</span>
+          <span class="tag">Canva</span>
+          <span class="tag">HTML · CSS · JS</span>
+        </div>
+      </div>
+      <div class="painel heat reveal" style="background:linear-gradient(140deg,#0a5e68,#04333a)">
+        <p class="painel-rotulo">Viabilidade econômica</p>
+        <p style="font-size:2rem;font-family:var(--display);font-weight:900;color:#fff">R$ 90 – R$ 155</p>
+        <p style="margin-top:.8rem">
+          Custo total estimado do protótipo em escala reduzida. O valor baixo demonstra que a
+          solução pode ser facilmente replicada em ambiente educacional, tornando-se acessível
+          para diferentes turmas e contextos escolares.
+        </p>
+        <a class="btn btn-solid" style="margin-top:1.4rem" href="robotica.html">Ver detalhamento →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div>
+          <h2>Da ideia ao protótipo em 4 etapas</h2>
+          <p>Acompanhe o desenvolvimento completo: pesquisas, simulações no Tinkercad, ajustes e a versão final.</p>
+        </div>
+        <div style="display:flex;gap:.9rem;flex-wrap:wrap;position:relative;z-index:2">
+          <a class="btn btn-solid" href="desenvolvimento.html">Ver desenvolvimento</a>
+          <a class="btn btn-line" href="resultados.html">Resultados</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand">Aqua+ 💧</p>
+      <p>Tecnologia aplicada à acessibilidade: sistema de aquecimento automatizado para piscinas.</p>
+    </div>
+    <nav aria-label="Mapa do site">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="tecnociencia.html">Tecnociência</a></li>
+        <li><a href="robotica.html">Robótica</a></li>
+        <li><a href="programacao.html">Programação</a></li>
+        <li><a href="desenvolvimento.html">Desenvolvimento</a></li>
+        <li><a href="resultados.html">Resultados</a></li>
+        <li><a href="equipe.html">Equipe</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p><strong>Equipe</strong><br>Julia Saory · Maria Fernanda · Luiza Brandão</p>
+      <p><strong>Colégio Estadual do Paraná</strong><br>Projeto Integrador · <span id="ano">2026</span></p>
+    </div>
+  </div>
+  <div class="wrap footer-base"><p>Feito com 💧, ciência e trabalho em equipe.</p></div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
