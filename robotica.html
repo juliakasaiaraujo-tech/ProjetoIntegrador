@@ -115,21 +115,117 @@
           <li>Baseada nos princípios do desenho universal</li>
         </ul>
       </div>
-      <figure class="figura reveal">
-        <svg viewBox="0 0 440 210" role="img" aria-label="Desenho esquemático da rampa motorizada subindo até a plataforma de acesso à piscina.">
-          <rect x="260" y="120" width="120" height="60" fill="#0e7c86"/>
-          <rect x="380" y="130" width="60" height="50" fill="#7adfe6"/>
-          <path d="M380 134 q 15 -6 30 0 q 15 6 30 0" stroke="#0a4a52" stroke-width="2" fill="none"/>
-          <path d="M30 180 L260 120 L260 180 Z" fill="#1fc2ce"/>
-          <path d="M30 180 L260 120" stroke="#04333a" stroke-width="3"/>
-          <circle cx="120" cy="148" r="10" fill="#04333a"/>
-          <circle cx="150" cy="140" r="10" fill="#04333a"/>
-          <rect x="118" y="112" width="40" height="20" rx="6" fill="#04333a"/>
-          <text x="30" y="200" fill="#3b5e63" font-size="12" font-family="monospace">rampa motorizada</text>
-          <text x="262" y="112" fill="#3b5e63" font-size="12" font-family="monospace">plataforma → piscina</text>
-        </svg>
-        <figcaption>Esquema da rampa: o motor eleva a plataforma até a borda da piscina com segurança.</figcaption>
-      </figure>
+      <figure style="background:#fff;border:1px solid #bfe7ea;border-radius:16px;padding:1.4rem">
+  <h3 style="margin-bottom:.4rem">Rampa motorizada interativa</h3>
+  <p style="color:#3b5e63;font-size:.92rem;margin-bottom:1rem">
+    Simule o sensor de presença e veja a plataforma subir até a borda da piscina —
+    ou controle a posição manualmente com o controle deslizante.
+  </p>
+
+  <div style="background:linear-gradient(180deg,#d9f6f8 0%,#9deef3 55%,#0e7c86 55%);border-radius:12px;padding:.8rem">
+    <svg viewBox="0 0 500 300" style="width:100%;height:auto;display:block" role="img"
+         aria-label="Simulação interativa da rampa motorizada de acessibilidade da piscina.">
+      <!-- água com ondas -->
+      <rect x="300" y="170" width="200" height="130" fill="#0e7c86"/>
+      <path d="M300 180 Q325 175 350 180 T400 180 T450 180 T500 180" stroke="#9deef3" stroke-width="2" fill="none" opacity=".6">
+        <animate attributeName="d" dur="3s" repeatCount="indefinite"
+          values="M300 180 Q325 175 350 180 T400 180 T450 180 T500 180;M300 180 Q325 186 350 180 T400 180 T450 180 T500 180;M300 180 Q325 175 350 180 T400 180 T450 180 T500 180"/>
+      </path>
+      <path d="M300 205 Q325 200 350 205 T400 205 T450 205 T500 205" stroke="#1fc2ce" stroke-width="2" fill="none" opacity=".5">
+        <animate attributeName="d" dur="4s" repeatCount="indefinite"
+          values="M300 205 Q325 210 350 205 T400 205 T450 205 T500 205;M300 205 Q325 200 350 205 T400 205 T450 205 T500 205;M300 205 Q325 210 350 205 T400 205 T450 205 T500 205"/>
+      </path>
+      <text x="360" y="235" fill="#9deef3" font-size="12" font-family="monospace">piscina</text>
+
+      <!-- borda da piscina -->
+      <rect x="293" y="164" width="207" height="8" fill="#04333a"/>
+
+      <!-- rampa -->
+      <path d="M40 262 L285 178 L285 262 Z" fill="#1fc2ce" stroke="#04333a" stroke-width="3"/>
+      <g stroke="#04333a" stroke-width="1.5" opacity=".45">
+        <line x1="70" y1="252" x2="85" y2="247"/><line x1="110" y1="238" x2="125" y2="233"/>
+        <line x1="150" y1="224" x2="165" y2="219"/><line x1="190" y1="210" x2="205" y2="205"/>
+        <line x1="230" y1="196" x2="245" y2="191"/>
+      </g>
+
+      <!-- sensor de presença -->
+      <circle id="rp-halo" cx="42" cy="252" r="8" fill="#31d482" opacity="0"/>
+      <circle cx="42" cy="252" r="5" fill="#06464f" stroke="#31d482" stroke-width="2"/>
+      <text x="22" y="284" fill="#04333a" font-size="11" font-family="monospace">sensor</text>
+
+      <!-- motor -->
+      <rect x="268" y="246" width="22" height="16" rx="2" fill="#f45d2c"/>
+      <circle id="rp-led" cx="279" cy="254" r="3.5" fill="#7a7a7a"/>
+      <text x="262" y="284" fill="#04333a" font-size="11" font-family="monospace">motor</text>
+
+      <!-- plataforma + cadeirante -->
+      <g id="rp-plat" transform="translate(50,255)">
+        <rect x="0" y="-9" width="62" height="9" rx="2" fill="#04333a"/>
+        <rect x="0" y="-13" width="62" height="4" rx="1" fill="#ff8a3d"/>
+        <circle cx="18" cy="-22" r="7" fill="#04333a" stroke="#1fc2ce" stroke-width="2"/>
+        <circle cx="44" cy="-22" r="7" fill="#04333a" stroke="#1fc2ce" stroke-width="2"/>
+        <rect x="12" y="-48" width="30" height="24" rx="4" fill="#06464f"/>
+        <rect x="38" y="-62" width="5" height="38" rx="2" fill="#06464f"/>
+        <circle cx="25" cy="-54" r="6" fill="#ffd9a8"/>
+        <rect x="18" y="-48" width="14" height="16" fill="#f45d2c"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- controles -->
+  <div style="display:grid;gap:.9rem;margin-top:1.1rem">
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+      <button id="rp-up" style="padding:.6rem 1.2rem;border-radius:999px;border:2px solid transparent;background:#0f8b98;color:#fff;font-weight:700;cursor:pointer">👤 Detectar usuário (sensor)</button>
+      <button id="rp-down" style="padding:.6rem 1.2rem;border-radius:999px;border:2px solid #0f8b98;background:transparent;color:#0f8b98;font-weight:700;cursor:pointer">⬇️ Descer plataforma</button>
+    </div>
+    <label style="display:grid;gap:.3rem;font-weight:700;font-size:.9rem;color:#072e33">
+      🎚️ Posição manual da plataforma
+      <input id="rp-slider" type="range" min="0" max="100" value="0" style="accent-color:#f45d2c">
+    </label>
+    <p id="rp-status" aria-live="polite" style="font-family:monospace;font-size:.85rem;color:#9deef3;background:#050d0f;border:1px solid rgba(157,238,243,.35);border-radius:10px;padding:.7rem 1rem">AGUARDANDO USUÁRIO…</p>
+  </div>
+
+  <figcaption style="font-size:.85rem;color:#3b5e63;margin-top:.9rem">
+    O sensor de presença detecta o usuário → o motor aciona → a plataforma sobe nivelada até a
+    borda da piscina. Assim, o acesso é seguro e independente, sem precisar de ajuda externa.
+  </figcaption>
+
+  <script>
+  (function(){
+    var plat=document.getElementById('rp-plat'),
+        led=document.getElementById('rp-led'),
+        halo=document.getElementById('rp-halo'),
+        slider=document.getElementById('rp-slider'),
+        up=document.getElementById('rp-up'),
+        down=document.getElementById('rp-down'),
+        st=document.getElementById('rp-status');
+    if(!plat) return;
+    var t=0, alvo=0, last=performance.now();
+    function loop(now){
+      var dt=Math.min(.05,(now-last)/1000); last=now;
+      var movendo=Math.abs(alvo-t)>0.001;
+      if(movendo){
+        var dir=alvo>t?1:-1;
+        t=Math.max(0,Math.min(1,t+dir*0.22*dt));
+        if((dir>0&&t>alvo)||(dir<0&&t<alvo)) t=alvo;
+      }
+      plat.setAttribute('transform','translate('+(40+t*245)+','+(262-t*84)+')');
+      slider.value=Math.round(t*100);
+      led.setAttribute('fill', movendo ? (Math.floor(now/250)%2 ? '#ffd27a' : '#f45d2c') : '#7a7a7a');
+      halo.setAttribute('opacity', alvo>t ? (0.4+0.35*Math.abs(Math.sin(now/150))) : 0);
+      if(movendo){ st.textContent = alvo>t ? 'USUÁRIO DETECTADO → SUBINDO…' : 'RETORNANDO…'; }
+      else if(t>=0.99){ st.textContent='PLATAFORMA NO TOPO ✓ ACESSO LIBERADO'; }
+      else if(t<=0.01){ st.textContent='AGUARDANDO USUÁRIO…'; }
+      else{ st.textContent='PLATAFORMA EM POSIÇÃO INTERMEDIÁRIA ('+Math.round(t*100)+'%)'; }
+      requestAnimationFrame(loop);
+    }
+    up.addEventListener('click',function(){alvo=1;});
+    down.addEventListener('click',function(){alvo=0;});
+    slider.addEventListener('input',function(){alvo=(+slider.value)/100;});
+    requestAnimationFrame(loop);
+  })();
+  </script>
+</figure>
     </div>
   </section>
 
