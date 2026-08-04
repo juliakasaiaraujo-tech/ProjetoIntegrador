@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programação · Aqua+ — Projeto Integrador CEP</title>
+<meta name="description" content="Lógica de controle automatizado, código Arduino comentado, display OLED e simulador interativo de temperatura.">
+<meta name="theme-color" content="#04333a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;700&family=Unbounded:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 3C13 12 8 18.5 8 25a12 12 0 0 0 24 0c0-6.5-5-13-12-22Z" fill="#1fc2ce"/>
+        <path d="M13 26c2 0 2.5 1.6 4.5 1.6S20 26 22 26s2.5 1.6 4.5 1.6" stroke="#04333a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-text">Aqua+<small>Projeto Integrador · CEP</small></span>
+    </a>
+    <nav class="menu" aria-label="Navegação principal">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="tecnociencia.html">Tecnociência</a></li>
+        <li><a href="robotica.html">Robótica</a></li>
+        <li><a href="programacao.html" class="active" aria-current="page">Programação</a></li>
+        <li><a href="desenvolvimento.html">Desenvolvimento</a></li>
+        <li><a href="resultados.html">Resultados</a></li>
+        <li><a href="equipe.html">Equipe</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="page-hero">
+    <span class="ghost" aria-hidden="true">04</span>
+    <div class="wrap">
+      <p class="mod">Módulo 04 · Programação</p>
+      <h1>O cérebro por trás do aquecimento</h1>
+      <p class="hero-sub">A lógica de controle automatizado, o código do Arduino e um simulador para você testar o sistema agora mesmo.</p>
+    </div>
+    <div class="waves" aria-hidden="true">
+      <svg class="w1" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 62 C 240 108 480 18 720 48 C 960 78 1200 26 1440 66 L 1440 120 L 0 120 Z" fill="rgba(157,238,243,.12)"/></svg>
+      <svg class="w2" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 84 C 260 36 520 104 780 74 C 1040 44 1240 96 1440 58 L 1440 120 L 0 120 Z" fill="#f2fbfc"/></svg>
+    </div>
+  </section>
+
+  <!-- LÓGICA -->
+  <section class="section" id="logica">
+    <div class="wrap">
+      <p class="sec-tag">Lógica de controle</p>
+      <h2 class="sec-title">O passo a passo do programa</h2>
+      <ol class="steps" style="margin-top:1.8rem">
+        <li class="reveal"><span class="f-num" aria-hidden="true">1</span><div><h3>Leitura</h3><p>O sensor mede a temperatura da água a cada ciclo do programa.</p></div></li>
+        <li class="reveal"><span class="f-num" aria-hidden="true">2</span><div><h3>Comparação</h3><p>O Arduino compara o valor lido com a temperatura ideal (30 °C no simulador).</p></div></li>
+        <li class="reveal"><span class="f-num" aria-hidden="true">3</span><div><h3>Aquecimento</h3><p>Se a água estiver fria demais, o relé é acionado e o aquecedor liga.</p></div></li>
+        <li class="reveal"><span class="f-num" aria-hidden="true">4</span><div><h3>Desligamento</h3><p>Ao atingir o alvo, o relé desliga — evitando desperdício de energia (histerese).</p></div></li>
+        <li class="reveal"><span class="f-num" aria-hidden="true">5</span><div><h3>Exibição</h3><p>O display OLED atualiza temperatura e status em tempo real.</p></div></li>
+        <li class="reveal"><span class="f-num" aria-hidden="true">6</span><div><h3>Acessibilidade</h3><p>Sensores de presença detectam usuários e ativam a rampa motorizada quando necessário.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- CÓDIGO -->
+  <section class="section" id="codigo" style="padding-top:0">
+    <div class="wrap split">
+      <div>
+        <p class="sec-tag">Código Arduino</p>
+        <h2 class="sec-title">O programa, explicado</h2>
+        <p>
+          O sketch roda em dois blocos clássicos do Arduino: o <code>setup()</code>, que prepara
+          pinos, sensor e display uma única vez; e o <code>loop()</code>, que repete para sempre
+          o ciclo <strong>ler → comparar → agir → exibir</strong>.
+        </p>
+        <p style="margin-top:1rem">
+          A <strong>banda de histerese</strong> (±0,5 °C) impede que o relé fique ligando e
+          desligando sem parar quando a temperatura está bem perto do alvo — protegendo o
+          equipamento e economizando energia.
+        </p>
+        <p style="margin-top:1rem">
+          O <strong>display OLED</strong> mostra a temperatura com números grandes e alto
+          contraste: informação perceptível para qualquer usuário, reforçando a acessibilidade.
+        </p>
+      </div>
+      <div class="codigo reveal">
+        <div class="cod-head"><span>💾</span> aquamais.ino — versão resumida</div>
+<pre><span class="pp">#include</span> <span class="str">&lt;OneWire.h&gt;</span>
+<span class="pp">#include</span> <span class="str">&lt;DallasTemperature.h&gt;</span>
+<span class="pp">#include</span> <span class="str">&lt;Adafruit_SSD1306.h&gt;</span>
+
+<span class="pp">#define</span> PIN_SENSOR 2
+<span class="pp">#define</span> PIN_RELE   8
+
+<span class="kw">const</span> <span class="kw">float</span> ALVO  = <span class="num">30.0</span>;  <span class="com">// temperatura ideal (°C)</span>
+<span class="kw">const</span> <span class="kw">float</span> BANDA = <span class="num">0.5</span>;   <span class="com">// histerese (±°C)</span>
+
+OneWire oneWire(PIN_SENSOR);
+DallasTemperature sensor(&amp;oneWire);
+Adafruit_SSD1306 display(<span class="num">128</span>, <span class="num">32</span>);
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(PIN_RELE, OUTPUT);
+  <span class="fn">digitalWrite</span>(PIN_RELE, LOW);  <span class="com">// começa desligado</span>
+  sensor.<span class="fn">begin</span>();
+  display.<span class="fn">begin</span>(SSD1306_SWITCHCAPVCC, <span class="num">0x3C</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  sensor.<span class="fn">requestTemperatures</span>();
+  <span class="kw">float</span> t = sensor.<span class="fn">getTempCByIndex</span>(<span class="num">0</span>);
+
+  <span class="kw">if</span> (t &lt; ALVO - BANDA)          <span class="com">// água fria?</span>
+    <span class="fn">digitalWrite</span>(PIN_RELE, HIGH); <span class="com">// liga aquecedor</span>
+  <span class="kw">else if</span> (t &gt;= ALVO)            <span class="com">// chegou no alvo?</span>
+    <span class="fn">digitalWrite</span>(PIN_RELE, LOW);  <span class="com">// desliga</span>
+
+  display.<span class="fn">clearDisplay</span>();
+  display.<span class="fn">setTextSize</span>(<span class="num">2</span>);
+  display.<span class="fn">print</span>(t);
+  display.<span class="fn">print</span>(<span class="str">" C"</span>);
+  display.<span class="fn">display</span>();
+  <span class="fn">delay</span>(<span class="num">1000</span>);
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIMULADOR -->
+  <section class="section" id="simulador" style="padding-top:0">
+    <div class="wrap">
+      <p class="sec-tag">Interatividade</p>
+      <h2 class="sec-title">Simulador do sistema de aquecimento</h2>
+      <p class="sec-lead">
+        Arraste o controle para mudar a temperatura da água e ligue o sistema. Observe a
+        histerese em ação: o relé liga abaixo de 29,5 °C e só desliga ao alcançar 30,0 °C.
+      </p>
+      <div class="sim reveal">
+        <div class="sim-controls">
+          <label class="sim-label" for="sim-temp">Temperatura da água
+            <output id="sim-out" class="sim-out">26,0 °C</output>
+          </label>
+          <input type="range" id="sim-temp" min="15" max="40" step="0.1" value="26">
+          <div class="sim-actions">
+            <button id="sim-ligar" class="btn btn-teal">▶ Ligar sistema</button>
+            <p class="sim-alvo">Alvo: <strong>30,0 °C</strong> · banda: <strong>0,5 °C</strong></p>
+          </div>
+          <ul class="sim-leds">
+            <li><span class="led" id="led-rele" aria-hidden="true"></span> Relé (aquecedor)</li>
+            <li><span class="led" id="led-ok" aria-hidden="true"></span> Zona de conforto</li>
+          </ul>
+        </div>
+        <div class="oled" aria-live="polite">
+          <div class="oled-head"><span>PISCINA · SIMULADOR</span><span id="sim-sys">SYS OFF</span></div>
+          <p class="oled-temp"><span id="sim-oled-temp">26.0</span>°C</p>
+          <p class="oled-line"><span>ALVO</span><span>30.0 °C</span></p>
+          <p class="oled-status" id="sim-status">Sistema desligado. Ligue para simular o controle automático.</p>
+          <div class="gauge" aria-hidden="true"><span class="gauge-zone"></span><span class="gauge-pin" id="sim-pin"></span></div>
+          <div class="gauge-scale" aria-hidden="true"><span>15</span><span>22,5</span><span>30</span><span>37,5</span><span>40 °C</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALÉM DO ARDUINO -->
+  <section class="section" id="alem" style="padding-top:0">
+    <div class="wrap">
+      <p class="sec-tag">Além do Arduino</p>
+      <h2 class="sec-title">Programação também comunica</h2>
+      <div class="grid g3" style="margin-top:1.6rem">
+        <div class="card reveal"><span class="ico" aria-hidden="true">🌐</span><h3>Este site</h3><p>Documentação completa do projeto construída com HTML, CSS e JavaScript.</p></div>
+        <div class="card reveal"><span class="ico" aria-hidden="true">🎨</span><h3>Apresentação no Canva</h3><p>Slides criados para apresentar o projeto à comunidade escolar.</p></div>
+        <div class="card reveal"><span class="ico" aria-hidden="true">🧪</span><h3>Simulação no Tinkercad</h3><p>Circuito testado virtualmente antes da montagem física, reduzindo riscos.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div>
+          <h2>Quer ver como tudo saiu do papel?</h2>
+          <p>Conheça as 4 etapas do desenvolvimento e os desafios que a equipe superou.</p>
+        </div>
+        <a class="btn btn-solid" href="desenvolvimento.html" style="position:relative;z-index:2">Ver desenvolvimento →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand">Aqua+ 💧</p>
+      <p>Tecnologia aplicada à acessibilidade: sistema de aquecimento automatizado para piscinas.</p>
+    </div>
+    <nav aria-label="Mapa do site">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="tecnociencia.html">Tecnociência</a></li>
+        <li><a href="robotica.html">Robótica</a></li>
+        <li><a href="programacao.html">Programação</a></li>
+        <li><a href="desenvolvimento.html">Desenvolvimento</a></li>
+        <li><a href="resultados.html">Resultados</a></li>
+        <li><a href="equipe.html">Equipe</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p><strong>Equipe</strong><br>Julia Saory · Maria Fernanda · Luiza Brandão</p>
+      <p><strong>Colégio Estadual do Paraná</strong><br>Projeto Integrador · <span id="ano">2026</span></p>
+    </div>
+  </div>
+  <div class="wrap footer-base"><p>Feito com 💧, ciência e trabalho em equipe.</p></div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
