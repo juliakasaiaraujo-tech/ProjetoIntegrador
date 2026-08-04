@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robótica · Aqua+ — Projeto Integrador CEP</title>
+<meta name="description" content="Componentes, sensores e atuadores do sistema: Arduino, relé, display OLED, rampa motorizada de acessibilidade e protótipo em escala reduzida.">
+<meta name="theme-color" content="#04333a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;700&family=Unbounded:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 3C13 12 8 18.5 8 25a12 12 0 0 0 24 0c0-6.5-5-13-12-22Z" fill="#1fc2ce"/>
+        <path d="M13 26c2 0 2.5 1.6 4.5 1.6S20 26 22 26s2.5 1.6 4.5 1.6" stroke="#04333a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-text">Aqua+<small>Projeto Integrador · CEP</small></span>
+    </a>
+    <nav class="menu" aria-label="Navegação principal">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="tecnociencia.html">Tecnociência</a></li>
+        <li><a href="robotica.html" class="active" aria-current="page">Robótica</a></li>
+        <li><a href="programacao.html">Programação</a></li>
+        <li><a href="desenvolvimento.html">Desenvolvimento</a></li>
+        <li><a href="resultados.html">Resultados</a></li>
+        <li><a href="equipe.html">Equipe</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="page-hero">
+    <span class="ghost" aria-hidden="true">03</span>
+    <div class="wrap">
+      <p class="mod">Módulo 03 · Robótica</p>
+      <h1>Sensores, motores e uma rampa que inclui</h1>
+      <p class="hero-sub">A estrutura física do sistema: componentes eletrônicos, funcionamento dos sensores e atuadores e o protótipo em escala reduzida.</p>
+    </div>
+    <div class="waves" aria-hidden="true">
+      <svg class="w1" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 62 C 240 108 480 18 720 48 C 960 78 1200 26 1440 66 L 1440 120 L 0 120 Z" fill="rgba(157,238,243,.12)"/></svg>
+      <svg class="w2" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 84 C 260 36 520 104 780 74 C 1040 44 1240 96 1440 58 L 1440 120 L 0 120 Z" fill="#f2fbfc"/></svg>
+    </div>
+  </section>
+
+  <!-- COMPONENTES -->
+  <section class="section" id="componentes">
+    <div class="wrap">
+      <p class="sec-tag">Componentes</p>
+      <h2 class="sec-title">O que faz o sistema funcionar</h2>
+      <div class="grid g4" style="margin-top:1.8rem">
+        <div class="card reveal"><span class="ico" aria-hidden="true">🔌</span><h3>Arduino Uno</h3><p>O “cérebro” do projeto: recebe dados dos sensores, toma decisões e comanda os atuadores.</p></div>
+        <div class="card reveal"><span class="ico" aria-hidden="true">🌡️</span><h3>Sensor de temperatura</h3><p>Mede continuamente a temperatura da água e envia o valor ao Arduino.</p></div>
+        <div class="card reveal"><span class="ico" aria-hidden="true">👁️</span><h3>Sensor de presença</h3><p>Identifica usuários próximos, ativando o sistema de acessibilidade quando necessário.</p></div>
+        <div class="card reveal"><span class="ico" aria-hidden="true">⚡</span><h3>Relé 5V</h3><p>A chave eletrônica que liga e desliga o aquecedor automaticamente.</p></div>
+        <div class="card reveal"><span class="ico" aria-hidden="true">🖥️</span><h3>Display OLED</h3><p>Mostra temperatura e status em tempo real, com alto contraste e leitura fácil.</p></div>
+        <div class="card reveal"><span class="ico" aria-hidden="true">⚙️</span><h3>Motores e atuadores</h3><p>Movimentam a rampa de acessibilidade, garantindo acesso seguro à piscina.</p></div>
+        <div class="card reveal"><span class="ico" aria-hidden="true">🧩</span><h3>Protoboard e cabos</h3><p>Conectam todos os componentes do circuito sem necessidade de solda.</p></div>
+        <div class="card reveal"><span class="ico" aria-hidden="true">♻️</span><h3>Estrutura reciclável</h3><p>Recipiente de 5 litros simula a piscina; materiais recicláveis compõem a estrutura.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLUXO -->
+  <section class="section" id="fluxo" style="padding-top:0">
+    <div class="wrap">
+      <p class="sec-tag">Como funciona</p>
+      <h2 class="sec-title">Leitura → Processamento → Ação</h2>
+      <div class="flow reveal">
+        <div class="flow-node"><span class="f-ico" aria-hidden="true">📡</span><h3>Leitura</h3><p>Sensores coletam temperatura da água e proximidade de usuários.</p></div>
+        <div class="flow-arrow" aria-hidden="true">➜</div>
+        <div class="flow-node"><span class="f-ico" aria-hidden="true">🧠</span><h3>Processamento</h3><p>O Arduino processa os dados e compara com a temperatura ideal.</p></div>
+        <div class="flow-arrow" aria-hidden="true">➜</div>
+        <div class="flow-node"><span class="f-ico" aria-hidden="true">⚙️</span><h3>Ação</h3><p>Relé aciona o aquecedor; motores movimentam a rampa; display exibe o status.</p></div>
+      </div>
+      <div class="painel reveal" style="margin-top:1.6rem">
+        <p class="painel-rotulo">Monitoramento contínuo</p>
+        <p style="color:#fff;font-size:1.05rem">
+          Quando a temperatura está abaixo do ideal, o sistema aciona automaticamente o relé
+          para aquecimento, desligando ao atingir o valor desejado. Paralelamente, sensores de
+          proximidade identificam usuários com mobilidade reduzida e ativam o sistema de
+          acessibilidade. Todo o processo é automatizado: eficiência energética, segurança e praticidade.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACESSIBILIDADE -->
+  <section class="section" id="rampa" style="padding-top:0">
+    <div class="wrap split">
+      <div>
+        <p class="sec-tag">Acessibilidade</p>
+        <h2 class="sec-title">Rampa motorizada de acesso</h2>
+        <p>
+          A plataforma de acessibilidade com rampa motorizada facilita o acesso à piscina para
+          pessoas com mobilidade reduzida. O sensor de presença identifica o usuário e o sistema
+          prepara a rampa automaticamente — sem depender de ajuda externa.
+        </p>
+        <ul class="t-list" style="margin-top:1rem">
+          <li>Acionamento automático por proximidade</li>
+          <li>Teste de funcionamento e segurança na versão final</li>
+          <li>Baseada nos princípios do desenho universal</li>
+        </ul>
+      </div>
+      <figure class="figura reveal">
+        <svg viewBox="0 0 440 210" role="img" aria-label="Desenho esquemático da rampa motorizada subindo até a plataforma de acesso à piscina.">
+          <rect x="260" y="120" width="120" height="60" fill="#0e7c86"/>
+          <rect x="380" y="130" width="60" height="50" fill="#7adfe6"/>
+          <path d="M380 134 q 15 -6 30 0 q 15 6 30 0" stroke="#0a4a52" stroke-width="2" fill="none"/>
+          <path d="M30 180 L260 120 L260 180 Z" fill="#1fc2ce"/>
+          <path d="M30 180 L260 120" stroke="#04333a" stroke-width="3"/>
+          <circle cx="120" cy="148" r="10" fill="#04333a"/>
+          <circle cx="150" cy="140" r="10" fill="#04333a"/>
+          <rect x="118" y="112" width="40" height="20" rx="6" fill="#04333a"/>
+          <text x="30" y="200" fill="#3b5e63" font-size="12" font-family="monospace">rampa motorizada</text>
+          <text x="262" y="112" fill="#3b5e63" font-size="12" font-family="monospace">plataforma → piscina</text>
+        </svg>
+        <figcaption>Esquema da rampa: o motor eleva a plataforma até a borda da piscina com segurança.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PROTÓTIPO E CUSTO -->
+  <section class="section" id="prototipo" style="padding-top:0">
+    <div class="wrap">
+      <p class="sec-tag">Protótipo em escala reduzida</p>
+      <h2 class="sec-title">Uma piscina de 5 litros</h2>
+      <p class="sec-lead">
+        Para validar o sistema antes da implementação real, montamos um protótipo com um
+        recipiente de 5 litros representando a piscina — todos os sensores e o controle
+        funcionam nessa escala.
+      </p>
+      <div class="table-wrap reveal" style="margin-top:1.8rem;border-radius:var(--raio);box-shadow:var(--sombra);overflow:hidden">
+        <table class="tabela">
+          <thead>
+            <tr><th>Componente</th><th>Faixa de preço estimada</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Arduino Uno R3</td><td>R$ 45 – R$ 70</td></tr>
+            <tr><td>Sensor de temperatura</td><td>R$ 8 – R$ 15</td></tr>
+            <tr><td>Relé 5V</td><td>R$ 6 – R$ 12</td></tr>
+            <tr><td>Display OLED</td><td>R$ 12 – R$ 20</td></tr>
+            <tr><td>Protoboard e cabos</td><td>R$ 10 – R$ 18</td></tr>
+            <tr><td>Estrutura (materiais recicláveis)</td><td>R$ 0</td></tr>
+            <tr><td>Outros componentes</td><td>R$ 9 – R$ 20</td></tr>
+            <tr><td><strong>Total estimado</strong></td><td><strong>R$ 90 – R$ 155</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="nota">*Faixas estimadas conforme levantamento do grupo; valores podem variar por fornecedor.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div>
+          <h2>Hardware pronto. E a inteligência?</h2>
+          <p>Descubra a lógica de controle e o código Arduino que fazem tudo isso funcionar sozinho.</p>
+        </div>
+        <a class="btn btn-solid" href="programacao.html" style="position:relative;z-index:2">Ir para Programação →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand">Aqua+ 💧</p>
+      <p>Tecnologia aplicada à acessibilidade: sistema de aquecimento automatizado para piscinas.</p>
+    </div>
+    <nav aria-label="Mapa do site">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="tecnociencia.html">Tecnociência</a></li>
+        <li><a href="robotica.html">Robótica</a></li>
+        <li><a href="programacao.html">Programação</a></li>
+        <li><a href="desenvolvimento.html">Desenvolvimento</a></li>
+        <li><a href="resultados.html">Resultados</a></li>
+        <li><a href="equipe.html">Equipe</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p><strong>Equipe</strong><br>Julia Saory · Maria Fernanda · Luiza Brandão</p>
+      <p><strong>Colégio Estadual do Paraná</strong><br>Projeto Integrador · <span id="ano">2026</span></p>
+    </div>
+  </div>
+  <div class="wrap footer-base"><p>Feito com 💧, ciência e trabalho em equipe.</p></div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
