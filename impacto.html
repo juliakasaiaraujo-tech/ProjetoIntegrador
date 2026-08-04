@@ -155,9 +155,41 @@
           <div><p class="res-lbl">Equivalente em árvores (1 ano)</p><p class="res-num" id="eco-arv">—</p></div>
         </div>
       </div>
+
+      <script>
+      (function(){
+        var kw = document.getElementById('eco-kw'),
+            h  = document.getElementById('eco-h');
+        if (!kw || !h) return;
+
+        function upd(){
+          var k = +kw.value, hh = +h.value;
+          document.getElementById('eco-kw-out').textContent = String(k).replace('.', ',');
+          document.getElementById('eco-h-out').textContent  = String(hh).replace('.', ',');
+
+          var mes = k * hh * 30;      // kWh economizados por mês
+          var rs  = mes * 0.95;       // economia em reais
+          var co2 = mes * 0.075;      // kg de CO₂ não emitidos
+          var arv = (co2 * 12) / 22;  // árvores equivalentes em 1 ano
+
+          document.getElementById('eco-kwh').textContent =
+            mes.toLocaleString('pt-BR', {maximumFractionDigits: 0}) + ' kWh';
+          document.getElementById('eco-rs').textContent =
+            'R$ ' + rs.toLocaleString('pt-BR', {maximumFractionDigits: 0});
+          document.getElementById('eco-co2').textContent =
+            co2.toLocaleString('pt-BR', {maximumFractionDigits: 1}) + ' kg';
+          document.getElementById('eco-arv').textContent =
+            '≈ ' + arv.toLocaleString('pt-BR', {maximumFractionDigits: 1}) + ' árvores';
+        }
+
+        kw.addEventListener('input', upd);
+        h.addEventListener('input', upd);
+        upd(); // calcula uma vez ao carregar a página
+      })();
+      </script>
     </div>
   </section>
-
+  
   <!-- ══════════════ JARDIM INTERATIVO ══════════════ -->
   <section class="section" id="jardim-sec" style="padding-top:0">
     <div class="wrap">
