@@ -533,3 +533,20 @@ svg, canvas { max-width: 100%; }
   .oled-temp { font-size: 2.2rem; }
   .stats-grid { grid-template-columns: 1fr !important; }
 }
+/* ===== CARDS DO MESMO TAMANHO NO CELULAR/TABLET ===== */
+@media (max-width: 880px) {
+  .g2, .g3 { grid-template-columns: 1fr; } /* tudo empilha com a mesma largura */
+}
+
+/* ===== MIXER RGB COMPACTO EM TELAS PEQUENAS ===== */
+@media (max-width: 640px) {
+  #ledrgb .card { padding: 1.2rem 1rem; }
+  #ledrgb .rgb-grid { gap: 1.2rem; }
+  /* caixa preta do LED menor (precisa de !important por causa do style inline) */
+  #ledrgb .rgb-grid > div:nth-child(2) > div:first-of-type {
+    width: 180px !important; height: 180px !important;
+  }
+  #rgb-led-difuso  { width: 110px !important; height: 110px !important; }
+  #rgb-led-transp  { width: 140px !important; height: 140px !important; }
+  #rgb-led-transp span { width: 72px !important; height: 72px !important; }
+}
