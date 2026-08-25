@@ -550,3 +550,19 @@ svg, canvas { max-width: 100%; }
   #rgb-led-transp  { width: 140px !important; height: 140px !important; }
   #rgb-led-transp span { width: 72px !important; height: 72px !important; }
 }
+/* ===== PATCH FINAL — LED RGB ===== */
+
+/* Mixer e painel ocupam a linha inteira (de novo) */
+#ledrgb .card:has(#rgb-r),
+#ledrgb .full,
+#ledrgb .painel { grid-column: 1 / -1 !important; }
+
+/* Impede o conteúdo de estourar o card (sliders/botões vazando) */
+#ledrgb .rgb-grid,
+#ledrgb .rgb-grid > div { min-width: 0; }
+
+/* A linha de código agora quebra em vez de esticar o card */
+#rgb-code {
+  white-space: normal !important;
+  word-break: break-word;
+}
