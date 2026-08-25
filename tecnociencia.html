@@ -407,20 +407,58 @@
         </div>
 
         <!-- GUIA DE PINOS -->
-                 <svg viewBox="0 0 300 230" style="width:100%;max-width:320px;margin:.6rem auto;display:block" role="img" aria-label="LED RGB com quatro pinos clicáveis, todos conectados à cabeça do componente.">
-            <!-- cabeça do LED (encapsulamento) — maior, cobrindo os 4 pinos -->
+                        <!-- GUIA DE PINOS -->
+        <div class="card reveal">
+          <h3>🔍 Guia de pinos</h3>
+          <p style="color:#3b5e63;font-size:.94rem;margin:.4rem 0 .8rem">
+            Clique nos terminais do LED RGB para identificar cada um. Dica: o <strong>pino mais longo</strong> é o comum!
+          </p>
+          <style>
+            .pin{cursor:pointer}
+            .pin .vis{transition:.2s}
+            .pin:hover .vis{fill:#1fc2ce}
+            .pin.sel .vis{fill:#ff8a3d}
+          </style>
+          <svg viewBox="0 0 300 230" style="width:100%;max-width:320px;margin:.6rem auto;display:block" role="img" aria-label="LED RGB com quatro pinos clicáveis, todos conectados à cabeça do componente.">
+            <!-- cabeça do LED (encapsulamento) -->
             <rect x="82" y="14" width="136" height="80" rx="38" fill="#d9f6f8" stroke="#bfe7ea" stroke-width="2"/>
-            <!-- bases metálicas internas (uma por pino) -->
+            <!-- bases metálicas internas (a cinza maior é a do pino comum) -->
             <rect x="98"  y="52" width="12" height="32" fill="#ff4d4d" opacity=".8"/>
             <rect x="131" y="46" width="12" height="38" fill="#c0c8cb" opacity=".95"/>
             <rect x="164" y="52" width="12" height="32" fill="#31d482" opacity=".8"/>
             <rect x="197" y="52" width="12" height="32" fill="#39c4f0" opacity=".8"/>
-            <!-- pinos: vermelho, comum (mais longo), verde e azul -->
-            <g class="pin" data-msg="Pino 1 — VERMELHO (R)"><rect x="100" y="92" width="8" height="70" fill="#9aa5a8"/></g>
-            <g class="pin" data-msg="Pino 2 — COMUM (o mais longo) → GND no catodo comum ou 5V no anodo comum"><rect x="133" y="92" width="8" height="100" fill="#9aa5a8"/></g>
-            <g class="pin" data-msg="Pino 3 — VERDE (G)"><rect x="166" y="92" width="8" height="70" fill="#9aa5a8"/></g>
-            <g class="pin" data-msg="Pino 4 — AZUL (B)"><rect x="199" y="92" width="8" height="70" fill="#9aa5a8"/></g>
+            <!-- pinos: retângulo transparente = área de clique maior / retângulo .vis = haste visível -->
+            <g class="pin" data-msg="Pino 1 — VERMELHO (R)">
+              <rect x="88" y="86" width="26" height="84" fill="transparent"/>
+              <rect class="vis" x="100" y="92" width="8" height="70" fill="#9aa5a8"/>
+            </g>
+            <g class="pin" data-msg="Pino 2 — COMUM (o mais longo) → ligado na maior placa interna; vai no GND (catodo comum) ou no 5V (anodo comum)">
+              <rect x="121" y="86" width="26" height="114" fill="transparent"/>
+              <rect class="vis" x="133" y="92" width="8" height="100" fill="#9aa5a8"/>
+            </g>
+            <g class="pin" data-msg="Pino 3 — VERDE (G)">
+              <rect x="154" y="86" width="26" height="84" fill="transparent"/>
+              <rect class="vis" x="166" y="92" width="8" height="70" fill="#9aa5a8"/>
+            </g>
+            <g class="pin" data-msg="Pino 4 — AZUL (B)">
+              <rect x="187" y="86" width="26" height="84" fill="transparent"/>
+              <rect class="vis" x="199" y="92" width="8" height="70" fill="#9aa5a8"/>
+            </g>
           </svg>
+          <p id="pino-msg" aria-live="polite" style="font-size:.88rem;color:#3b5e63;background:#eafcff;border:1px dashed #1fc2ce;border-radius:10px;padding:.6rem .9rem;min-height:2.6em">👆 Clique nos pinos para identificá-los!</p>
+          <script>
+          (function(){
+            var msg=document.getElementById('pino-msg'); if(!msg) return;
+            document.querySelectorAll('.pin').forEach(function(p){
+              p.addEventListener('click',function(){
+                document.querySelectorAll('.pin').forEach(function(x){x.classList.remove('sel');});
+                p.classList.add('sel');
+                msg.textContent=p.dataset.msg;
+              });
+            });
+          })();
+          </script>
+        </div>
 
         <!-- TESTE DO RESISTOR -->
         <div class="card reveal">
