@@ -277,7 +277,7 @@
     </div>
   </section>
 
-  <!-- ══════════════ LABORATÓRIO DE LED RGB ══════════════ -->
+   <!-- ══════════════ LABORATÓRIO DE LED RGB ══════════════ -->
   <section class="section" id="ledrgb" style="padding-top:0">
     <div class="wrap">
       <p class="sec-tag">Eletrônica e luz</p>
@@ -289,9 +289,8 @@
         é possível gerar milhões de cores. É a mesma tecnologia dos pixels das telas OLED!
       </p>
 
+      <!-- MIXER RGB (largura total) -->
       <div class="grid" style="margin-top:1.8rem">
-
-        <!-- MIXER RGB -->
         <div class="card reveal" style="grid-column:1/-1">
           <h3>🎨 Mixer RGB — misture cores como o Arduino</h3>
           <p style="color:#3b5e63;font-size:.94rem;margin:.4rem 0 1.2rem">
@@ -405,9 +404,12 @@
           })();
           </script>
         </div>
+      </div>
+
+      <!-- GUIA DE PINOS + TESTE DO RESISTOR (2 colunas) -->
+      <div class="grid g2" style="margin-top:1.25rem">
 
         <!-- GUIA DE PINOS -->
-                        <!-- GUIA DE PINOS -->
         <div class="card reveal">
           <h3>🔍 Guia de pinos</h3>
           <p style="color:#3b5e63;font-size:.94rem;margin:.4rem 0 .8rem">
@@ -432,7 +434,7 @@
               <rect x="88" y="86" width="26" height="84" fill="transparent"/>
               <rect class="vis" x="100" y="92" width="8" height="70" fill="#9aa5a8"/>
             </g>
-            <g class="pin" data-msg="Pino 2 — COMUM (o mais longo) → ligado na maior placa interna; vai no GND (catodo comum) ou no 5V (anodo comum)">
+            <g class="pin" data-msg="Pino 2 — COMUM (o mais longo): ligado à maior placa interna; vai no GND (catodo comum) ou no 5V (anodo comum)">
               <rect x="121" y="86" width="26" height="114" fill="transparent"/>
               <rect class="vis" x="133" y="92" width="8" height="100" fill="#9aa5a8"/>
             </g>
@@ -511,8 +513,11 @@
           </script>
         </div>
 
-        <!-- TEORIA EM CARDS -->
-               <!-- TEORIA EM CARDS (ícone + título na horizontal) -->
+      </div>
+
+      <!-- 6 CARDS DE TEORIA (3 colunas, ícone + título na horizontal) -->
+      <div class="grid g3" style="margin-top:1.25rem">
+
         <div class="card reveal">
           <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem">
             <span style="font-size:1.5rem;line-height:1" aria-hidden="true">🔴🟢🔵</span>
@@ -560,18 +565,20 @@
           </div>
           <p style="color:#3b5e63;font-size:.94rem">O encapsulamento <strong>difuso</strong> (opaco) mistura a luz antes de sair — cor uniforme, ideal. O transparente deixa ver os três feixes separados.</p>
         </div>
-        <!-- CONEXÃO COM O PROJETO -->
-        <div class="painel reveal" style="grid-column:1/-1">
-          <p class="painel-rotulo">O LED RGB no projeto Aqua+</p>
-          <p style="color:#fff;font-size:1.05rem">
-            A ideia inicial do projeto inclui <strong>alertas sonoros e visuais para pessoas com
-            deficiência</strong> — e um LED RGB é perfeito para isso: verde = piscina pronta,
-            azul = aquecendo, vermelho = atenção. E o <strong>display OLED</strong> do painel usa o
-            mesmo princípio: cada pixel é feito de luzes RGB misturadas!
-          </p>
-        </div>
 
       </div>
+
+      <!-- CONEXÃO COM O PROJETO -->
+      <div class="painel reveal" style="margin-top:1.25rem">
+        <p class="painel-rotulo">O LED RGB no projeto Aqua+</p>
+        <p style="color:#fff;font-size:1.05rem">
+          A ideia inicial do projeto inclui <strong>alertas sonoros e visuais para pessoas com
+          deficiência</strong> — e um LED RGB é perfeito para isso: verde = piscina pronta,
+          azul = aquecendo, vermelho = atenção. E o <strong>display OLED</strong> do painel usa o
+          mesmo princípio: cada pixel é feito de luzes RGB misturadas!
+        </p>
+      </div>
+
     </div>
   </section>
 
