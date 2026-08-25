@@ -490,13 +490,54 @@
         </div>
 
         <!-- TEORIA EM CARDS -->
-        <div class="card reveal"><span class="ico" aria-hidden="true">🔴 🟢 🔵</span><h3>3 LEDs em 1</h3><p>Um LED RGB encapsula um LED vermelho, um verde e um azul. Ajustando a intensidade de cada canal, geram-se milhões de cores — branco = todos no máximo (255, 255, 255).</p></div>
-        <div class="card reveal"><span class="ico" aria-hidden="true">⚡</span><h3>Controle PWM</h3><p>O Arduino usa <code>analogWrite()</code> (0 a 255) em pinos com ~: o sinal liga/desliga muito rápido — quanto mais tempo em nível alto, maior o brilho daquela cor.</p></div>
-        <div class="card reveal"><span class="ico" aria-hidden="true">🔌</span><h3>Catodo × Anodo</h3><p><strong>Catodo comum:</strong> pino comum no GND, acende com HIGH. <strong>Anodo comum:</strong> comum no 5V, lógica invertida — 0 = brilho máximo (código usa 255 − valor).</p></div>
-        <div class="card reveal"><span class="ico" aria-hidden="true">📏</span><h3>4 terminais</h3><p>O pino mais longo é o comum; a ordem típica é vermelho, comum, verde e azul. Dá para confirmar com multímetro na escala de diodo.</p></div>
-        <div class="card reveal"><span class="ico" aria-hidden="true">🧱</span><h3>Resistores obrigatórios</h3><p>Três resistores (um por cor), de 220Ω ou 330Ω, em série: limitam a corrente. Sem eles, o LED queima e a placa corre risco.</p></div>
-        <div class="card reveal"><span class="ico" aria-hidden="true">💡</span><h3>Difuso × Transparente</h3><p>O encapsulamento <strong>difuso</strong> (opaco) mistura a luz antes de sair — cor uniforme, ideal. O transparente deixa ver os três feixes separados.</p></div>
+               <!-- TEORIA EM CARDS (ícone + título na horizontal) -->
+        <div class="card reveal">
+          <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem">
+            <span style="font-size:1.5rem;line-height:1" aria-hidden="true">🔴🟢🔵</span>
+            <h3 style="margin:0;font-size:1.02rem">3 LEDs em 1</h3>
+          </div>
+          <p style="color:#3b5e63;font-size:.94rem">Um LED RGB encapsula um LED vermelho, um verde e um azul. Ajustando a intensidade de cada canal, geram-se milhões de cores — branco = todos no máximo (255, 255, 255).</p>
+        </div>
 
+        <div class="card reveal">
+          <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem">
+            <span style="font-size:1.5rem;line-height:1" aria-hidden="true">⚡</span>
+            <h3 style="margin:0;font-size:1.02rem">Controle PWM</h3>
+          </div>
+          <p style="color:#3b5e63;font-size:.94rem">O Arduino usa <code>analogWrite()</code> (0 a 255) em pinos com ~: o sinal liga/desliga muito rápido — quanto mais tempo em nível alto, maior o brilho daquela cor.</p>
+        </div>
+
+        <div class="card reveal">
+          <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem">
+            <span style="font-size:1.5rem;line-height:1" aria-hidden="true">🔌</span>
+            <h3 style="margin:0;font-size:1.02rem">Catodo × Anodo</h3>
+          </div>
+          <p style="color:#3b5e63;font-size:.94rem"><strong>Catodo comum:</strong> pino comum no GND, acende com HIGH. <strong>Anodo comum:</strong> comum no 5V, lógica invertida — 0 = brilho máximo (código usa 255 − valor).</p>
+        </div>
+
+        <div class="card reveal">
+          <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem">
+            <span style="font-size:1.5rem;line-height:1" aria-hidden="true">📏</span>
+            <h3 style="margin:0;font-size:1.02rem">4 terminais</h3>
+          </div>
+          <p style="color:#3b5e63;font-size:.94rem">O pino mais longo é o comum; a ordem típica é vermelho, comum, verde e azul. Dá para confirmar com multímetro na escala de diodo.</p>
+        </div>
+
+        <div class="card reveal">
+          <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem">
+            <span style="font-size:1.5rem;line-height:1" aria-hidden="true">🧱</span>
+            <h3 style="margin:0;font-size:1.02rem">Resistores obrigatórios</h3>
+          </div>
+          <p style="color:#3b5e63;font-size:.94rem">Três resistores (um por cor), de 220Ω ou 330Ω, em série: limitam a corrente. Sem eles, o LED queima e a placa corre risco.</p>
+        </div>
+
+        <div class="card reveal">
+          <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem">
+            <span style="font-size:1.5rem;line-height:1" aria-hidden="true">💡</span>
+            <h3 style="margin:0;font-size:1.02rem">Difuso × Transparente</h3>
+          </div>
+          <p style="color:#3b5e63;font-size:.94rem">O encapsulamento <strong>difuso</strong> (opaco) mistura a luz antes de sair — cor uniforme, ideal. O transparente deixa ver os três feixes separados.</p>
+        </div>
         <!-- CONEXÃO COM O PROJETO -->
         <div class="painel reveal" style="grid-column:1/-1">
           <p class="painel-rotulo">O LED RGB no projeto Aqua+</p>
