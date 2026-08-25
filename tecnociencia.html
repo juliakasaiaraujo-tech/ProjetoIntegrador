@@ -289,15 +289,29 @@
         é possível gerar milhões de cores. É a mesma tecnologia dos pixels das telas OLED!
       </p>
 
-      <!-- MIXER RGB (largura total) -->
-      <div class="grid" style="margin-top:1.8rem">
-        <div class="card reveal" style="grid-column:1/-1">
+      <style>
+        /* grade automática: todos os cards SEMPRE do mesmo tamanho */
+        #ledrgb .auto{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+        #ledrgb .full{grid-column:1/-1}
+        @media(max-width:640px){
+          #ledrgb .card{padding:1.2rem 1rem}
+          #ledrgb .rgb-grid{grid-template-columns:1fr!important;gap:1.2rem}
+          #ledrgb .ledbox{width:180px!important;height:180px!important}
+          #rgb-led-difuso{width:110px!important;height:110px!important}
+          #rgb-led-transp{width:140px!important;height:140px!important}
+          #rgb-led-transp span{width:72px!important;height:72px!important}
+        }
+      </style>
+
+      <div class="auto" style="margin-top:1.8rem">
+
+        <!-- MIXER RGB (largura total) -->
+        <div class="card reveal full">
           <h3>🎨 Mixer RGB — misture cores como o Arduino</h3>
           <p style="color:#3b5e63;font-size:.94rem;margin:.4rem 0 1.2rem">
             Mova os três canais e veja a mistura aditiva acontecer — exatamente o que a função
             <code>analogWrite()</code> faz nos pinos PWM (marcados com ~) do Arduino.
           </p>
-          <style>@media(max-width:880px){.rgb-grid{grid-template-columns:1fr!important}}</style>
           <div class="rgb-grid" style="display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center">
             <div>
               <label style="display:grid;gap:.3rem;font-weight:700;font-size:.9rem;color:#072e33;margin-bottom:.8rem">
@@ -331,7 +345,7 @@
             </div>
 
             <div style="text-align:center">
-              <div style="position:relative;width:230px;height:230px;margin:0 auto;background:#0a1a1d;border-radius:20px;display:grid;place-items:center;overflow:hidden">
+              <div class="ledbox" style="position:relative;width:230px;height:230px;margin:0 auto;background:#0a1a1d;border-radius:20px;display:grid;place-items:center;overflow:hidden">
                 <div id="rgb-led-difuso" style="width:140px;height:140px;border-radius:50%"></div>
                 <div id="rgb-led-transp" style="display:none;position:relative;width:170px;height:170px">
                   <span id="rgb-dot-r" style="position:absolute;left:12%;top:28%;width:90px;height:90px;border-radius:50%;background:#f00;mix-blend-mode:screen"></span>
@@ -404,10 +418,6 @@
           })();
           </script>
         </div>
-      </div>
-
-      <!-- GUIA DE PINOS + TESTE DO RESISTOR (2 colunas) -->
-      <div class="grid g2" style="margin-top:1.25rem">
 
         <!-- GUIA DE PINOS -->
         <div class="card reveal">
@@ -422,14 +432,11 @@
             .pin.sel .vis{fill:#ff8a3d}
           </style>
           <svg viewBox="0 0 300 230" style="width:100%;max-width:320px;margin:.6rem auto;display:block" role="img" aria-label="LED RGB com quatro pinos clicáveis, todos conectados à cabeça do componente.">
-            <!-- cabeça do LED (encapsulamento) -->
             <rect x="82" y="14" width="136" height="80" rx="38" fill="#d9f6f8" stroke="#bfe7ea" stroke-width="2"/>
-            <!-- bases metálicas internas (a cinza maior é a do pino comum) -->
             <rect x="98"  y="52" width="12" height="32" fill="#ff4d4d" opacity=".8"/>
             <rect x="131" y="46" width="12" height="38" fill="#c0c8cb" opacity=".95"/>
             <rect x="164" y="52" width="12" height="32" fill="#31d482" opacity=".8"/>
             <rect x="197" y="52" width="12" height="32" fill="#39c4f0" opacity=".8"/>
-            <!-- pinos: retângulo transparente = área de clique maior / retângulo .vis = haste visível -->
             <g class="pin" data-msg="Pino 1 — VERMELHO (R)">
               <rect x="88" y="86" width="26" height="84" fill="transparent"/>
               <rect class="vis" x="100" y="92" width="8" height="70" fill="#9aa5a8"/>
@@ -513,11 +520,7 @@
           </script>
         </div>
 
-      </div>
-
-      <!-- 6 CARDS DE TEORIA (3 colunas, ícone + título na horizontal) -->
-      <div class="grid g3" style="margin-top:1.25rem">
-
+        <!-- 6 CARDS DE TEORIA -->
         <div class="card reveal">
           <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem">
             <span style="font-size:1.5rem;line-height:1" aria-hidden="true">🔴🟢🔵</span>
@@ -566,22 +569,20 @@
           <p style="color:#3b5e63;font-size:.94rem">O encapsulamento <strong>difuso</strong> (opaco) mistura a luz antes de sair — cor uniforme, ideal. O transparente deixa ver os três feixes separados.</p>
         </div>
 
-      </div>
+        <!-- CONEXÃO COM O PROJETO -->
+        <div class="painel reveal full">
+          <p class="painel-rotulo">O LED RGB no projeto Aqua+</p>
+          <p style="color:#fff;font-size:1.05rem">
+            A ideia inicial do projeto inclui <strong>alertas sonoros e visuais para pessoas com
+            deficiência</strong> — e um LED RGB é perfeito para isso: verde = piscina pronta,
+            azul = aquecendo, vermelho = atenção. E o <strong>display OLED</strong> do painel usa o
+            mesmo princípio: cada pixel é feito de luzes RGB misturadas!
+          </p>
+        </div>
 
-      <!-- CONEXÃO COM O PROJETO -->
-      <div class="painel reveal" style="margin-top:1.25rem">
-        <p class="painel-rotulo">O LED RGB no projeto Aqua+</p>
-        <p style="color:#fff;font-size:1.05rem">
-          A ideia inicial do projeto inclui <strong>alertas sonoros e visuais para pessoas com
-          deficiência</strong> — e um LED RGB é perfeito para isso: verde = piscina pronta,
-          azul = aquecendo, vermelho = atenção. E o <strong>display OLED</strong> do painel usa o
-          mesmo princípio: cada pixel é feito de luzes RGB misturadas!
-        </p>
       </div>
-
     </div>
   </section>
-
   <!-- ══════════════ ANALOGIAS: DISCO DE NEWTON + CÂMARA ESCURA ══════════════ -->
   <section class="section" id="analogias" style="padding-top:0">
     <div class="wrap">
