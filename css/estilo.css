@@ -513,3 +513,23 @@ input[type=range]{width:100%;accent-color:var(--teal);cursor:pointer;height:2rem
   html{scroll-behavior:auto}
   .reveal{opacity:1;transform:none}
 }
+/* ===== CORREÇÃO MOBILE — tamanhos iguais e sem zoom automático ===== */
+
+/* 1) Impede o zoom automático do celular ao tocar em sliders e campos
+      (navegadores dão zoom quando o texto do campo é menor que 16px) */
+input, select, textarea { font-size: 16px; }
+
+/* 2) Nada pode vazar da largura da tela (evita página "estufada"/maior) */
+body { overflow-x: hidden; }
+svg, canvas { max-width: 100%; }
+
+/* 3) Cards e painéis sempre na mesma largura em qualquer tela */
+.card, .painel, .figura { width: 100%; max-width: 100%; box-sizing: border-box; }
+
+/* 4) Ajustes finos para telas pequenas */
+@media (max-width: 640px) {
+  .rgb-grid, .calc, .analogias, .split { grid-template-columns: 1fr !important; gap: 1.6rem; }
+  .hero-title { font-size: clamp(1.6rem, 7vw, 2.3rem); }
+  .oled-temp { font-size: 2.2rem; }
+  .stats-grid { grid-template-columns: 1fr !important; }
+}
