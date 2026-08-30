@@ -172,7 +172,117 @@ Adafruit_SSD1306 display(<span class="num">128</span>, <span class="num">32</spa
       </div>
     </div>
   </section>
+  <!-- ══════════════ SIMULADOR LED RGB ══════════════ -->
+  <section class="section" id="simulador-rgb" style="padding-top:0">
+    <div class="wrap">
+      <p class="sec-tag">Interatividade + acessibilidade</p>
+      <h2 class="sec-title">Simulador de LED RGB: a temperatura em cores</h2>
+      <p class="sec-lead">
+        No projeto, o LED RGB funciona como <strong>alerta visual</strong> — essencial para quem
+        não percebe alertas sonoros. Aqueça ou esfrie a piscina e veja a cor mudar em
+        degradê, junto com os valores que o Arduino enviaria aos pinos do LED (PWM, 0–255).
+      </p>
 
+      <div class="card reveal" style="margin-top:1.6rem">
+        <style>
+          @media(max-width:880px){.srgb-grid{grid-template-columns:1fr!important}}
+        </style>
+        <div class="srgb-grid" style="display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:center">
+
+          <!-- CONTROLES -->
+          <div>
+            <label style="display:grid;gap:.3rem;font-weight:700;font-size:.95rem;color:#072e33">
+              🌡️ Temperatura da água — <span id="srgb-t-out" style="font-family:var(--mono)">22,0 °C</span>
+              <input id="srgb-temp" type="range" min="15" max="40" step="0.1" value="22" style="accent-color:#ff8a3d">
+            </label>
+            <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin:1.1rem 0">
+              <button id="srgb-aquecer" style="padding:.6rem 1.2rem;border-radius:999px;border:0;background:#f45d2c;color:#fff;font-weight:700;cursor:pointer">🔥 Aquecer piscina</button>
+              <button id="srgb-resfriar" style="padding:.6rem 1.2rem;border-radius:999px;border:0;background:#39c4f0;color:#fff;font-weight:700;cursor:pointer">❄️ Esfriar</button>
+              <button id="srgb-parar" style="padding:.6rem 1.2rem;border-radius:999px;border:2px solid #0f8b98;background:transparent;color:#0f8b98;font-weight:700;cursor:pointer">⏹ Parar</button>
+            </div>
+            <p id="srgb-status" aria-live="polite" style="font-size:.9rem;color:#3b5e63;background:#eafcff;border:1px dashed #1fc2ce;border-radius:10px;padding:.7rem 1rem;min-height:3em"></p>
+            <p style="font-size:.8rem;color:#3b5e63;margin-top:.9rem">
+              💡 Azul = fria · Verde = pronta · Vermelho = quente demais. Assim, qualquer pessoa
+              entende o estado da piscina só de olhar — mesmo sem ouvir nada.
+            </p>
+          </div>
+
+          <!-- LED + CANAIS -->
+          <div style="text-align:center">
+            <div style="background:#0a1a1d;border-radius:20px;padding:1.6rem 1rem">
+              <div id="srgb-led" style="width:150px;height:150px;border-radius:50%;margin:0 auto;transition:background .3s,box-shadow .3s"></div>
+              <p style="color:#9deef3;font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;margin-top:1rem">LED RGB · ALERTA VISUAL</p>
+              <div style="display:flex;justify-content:center;gap:1.4rem;margin-top:1rem">
+                <span style="color:#ff6b6b;font-family:var(--mono);font-size:.85rem">R <b id="srgb-r">0</b><span id="srgb-dot-r" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f00;margin-left:.4rem"></span></span>
+                <span style="color:#7bd94c;font-family:var(--mono);font-size:.85rem">G <b id="srgb-g">0</b><span id="srgb-dot-g" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#0f0;margin-left:.4rem"></span></span>
+                <span style="color:#4cc9f0;font-family:var(--mono);font-size:.85rem">B <b id="srgb-b">0</b><span id="srgb-dot-b" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#00f;margin-left:.4rem"></span></span>
+              </div>
+            </div>
+            <p id="srgb-code" style="font-family:var(--mono);font-size:.78rem;color:#9deef3;background:#04262b;border-radius:10px;padding:.7rem .9rem;margin-top:.9rem;overflow-x:auto;white-space:nowrap"></p>
+          </div>
+
+        </div>
+
+        <script>
+        (function(){
+          var slider=document.getElementById('srgb-temp');
+          if(!slider) return;
+          var led=document.getElementById('srgb-led'),
+              tOut=document.getElementById('srgb-t-out'),
+              status=document.getElementById('srgb-status'),
+              code=document.getElementById('srgb-code'),
+              vr=document.getElementById('srgb-r'),vg=document.getElementById('srgb-g'),vb=document.getElementById('srgb-b'),
+              dr=document.getElementById('srgb-dot-r'),dg=document.getElementById('srgb-dot-g'),db=document.getElementById('srgb-dot-b'),
+              timer=null;
+
+          function hsl2rgb(h,s,l){
+            s/=100; l/=100;
+            var k=function(n){return (n+h/30)%12;};
+            var a=s*Math.min(l,1-l);
+            var f=function(n){return l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));};
+            return [Math.round(255*f(0)),Math.round(255*f(8)),Math.round(255*f(4))];
+          }
+
+          function upd(){
+            var t=+slider.value;
+            tOut.textContent=t.toFixed(1).replace('.',',')+' °C';
+            /* degradê: 15°C = azul (hue 210) → 40°C = vermelho (hue 0) */
+            var hue=210*(1-(t-15)/25);
+            var rgb=hsl2rgb(hue,90,55), r=rgb[0], g=rgb[1], b=rgb[2];
+            led.style.background='radial-gradient(circle at 35% 30%, rgba(255,255,255,.5), rgba(255,255,255,0) 45%), rgb('+r+','+g+','+b+')';
+            led.style.boxShadow='0 0 80px rgba('+r+','+g+','+b+',.8)';
+            vr.textContent=r; vg.textContent=g; vb.textContent=b;
+            dr.style.opacity=(r/255*.85+.15).toFixed(2);
+            dg.style.opacity=(g/255*.85+.15).toFixed(2);
+            db.style.opacity=(b/255*.85+.15).toFixed(2);
+            code.textContent='analogWrite(R,'+r+');  analogWrite(G,'+g+');  analogWrite(B,'+b+');';
+            status.textContent =
+              t<24  ? '❄️ Água FRIA — o LED fica azul e o sistema iniciaria o aquecimento.' :
+              t<29  ? '🌡️ AQUECENDO — a cor muda em degradê do azul para o verde.' :
+              t<=32 ? '✅ TEMPERATURA IDEAL — LED verde: piscina pronta e acessível!' :
+                      '🥵 QUENTE DEMAIS — LED vermelho/laranja: alerta visual de atenção.';
+          }
+
+          function anima(alvo){
+            if(timer) clearInterval(timer);
+            timer=setInterval(function(){
+              var t=+slider.value;
+              if(Math.abs(t-alvo)<0.05){ clearInterval(timer); timer=null; return; }
+              slider.value=(t+(alvo>t?0.1:-0.1)).toFixed(2);
+              upd();
+            },60);
+          }
+
+          slider.addEventListener('input',upd);
+          document.getElementById('srgb-aquecer').addEventListener('click',function(){anima(38);});
+          document.getElementById('srgb-resfriar').addEventListener('click',function(){anima(16);});
+          document.getElementById('srgb-parar').addEventListener('click',function(){ if(timer){clearInterval(timer);timer=null;} });
+          upd();
+        })();
+        </script>
+      </div>
+    </div>
+  </section>
   <!-- ALÉM DO ARDUINO -->
   <section class="section" id="alem" style="padding-top:0">
     <div class="wrap">
