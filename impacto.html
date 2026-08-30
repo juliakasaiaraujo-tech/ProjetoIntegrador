@@ -189,7 +189,77 @@
       </script>
     </div>
   </section>
-  
+    <!-- ══════════════ COLETOR SOLAR INTERATIVO ══════════════ -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="card reveal" style="grid-column:1/-1">
+        <h3>☀️ Laboratório do coletor solar</h3>
+        <p style="color:#3b5e63;font-size:.94rem;margin:.4rem 0 1rem">
+          A versão final do projeto integra <strong>aquecimento solar</strong>. Teste: quanto de sol e qual ângulo do painel rendem mais energia?
+        </p>
+        <div style="position:relative;height:230px;border-radius:16px;overflow:hidden;background:linear-gradient(180deg,#7ec8f2,#d9f6f8);border:1px solid rgba(255,255,255,.8)">
+          <span style="position:absolute;top:14px;left:18px;font-size:2.6rem">☀️</span>
+          <span id="sol-nuvem" style="position:absolute;top:10px;left:12px;font-size:2.4rem;opacity:0;transition:.5s">☁️</span>
+          <svg viewBox="0 0 460 230" style="position:absolute;inset:0;width:100%;height:100%">
+            <g id="sol-raios" stroke="#ffd27a" stroke-width="3" stroke-dasharray="7 7">
+              <line x1="70" y1="60" x2="250" y2="140"><animate attributeName="stroke-dashoffset" from="14" to="0" dur=".7s" repeatCount="indefinite"/></line>
+              <line x1="80" y1="45" x2="280" y2="135"><animate attributeName="stroke-dashoffset" from="14" to="0" dur=".7s" repeatCount="indefinite"/></line>
+              <line x1="60" y1="75" x2="225" y2="150"><animate attributeName="stroke-dashoffset" from="14" to="0" dur=".7s" repeatCount="indefinite"/></line>
+            </g>
+            <g id="sol-painel" transform="rotate(-30 260 150)">
+              <rect x="200" y="143" width="120" height="14" rx="4" fill="#06464f" stroke="#1fc2ce" stroke-width="2"/>
+              <line x1="240" y1="143" x2="240" y2="157" stroke="#1fc2ce" stroke-width="1.5"/>
+              <line x1="280" y1="143" x2="280" y2="157" stroke="#1fc2ce" stroke-width="1.5"/>
+            </g>
+            <path d="M320 155 C 350 165 360 175 380 185" stroke="#ff8a3d" stroke-width="3" fill="none" stroke-dasharray="6 6">
+              <animate attributeName="stroke-dashoffset" from="12" to="0" dur=".7s" repeatCount="indefinite"/>
+            </path>
+            <rect x="375" y="180" width="70" height="40" rx="8" fill="#0e7c86"/>
+            <text x="385" y="205" fill="#9deef3" font-size="11" font-family="monospace">piscina</text>
+          </svg>
+        </div>
+        <div style="display:grid;gap:.9rem;margin-top:1.1rem;max-width:560px">
+          <label style="display:grid;gap:.3rem;font-weight:800;font-size:.9rem;color:#0b3d5c">
+            🌤️ Intensidade do sol — <span id="sol-s-out" style="font-family:var(--mono)">80%</span>
+            <input id="sol-s" type="range" min="0" max="100" value="80" style="accent-color:#ff9a2e">
+          </label>
+          <label style="display:grid;gap:.3rem;font-weight:800;font-size:.9rem;color:#0b3d5c">
+            📐 Ângulo do painel — <span id="sol-a-out" style="font-family:var(--mono)">30°</span>
+            <input id="sol-a" type="range" min="0" max="60" value="30" style="accent-color:#2fa8e6">
+          </label>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;margin-top:1.1rem">
+          <p style="font-family:var(--display);font-size:1.5rem;color:#045a8c;margin:0">⚡ <span id="sol-eff">80</span>%</p>
+          <p style="font-size:.9rem;color:#39677f;margin:0">eficiência · aquece ≈ <strong id="sol-aq">2,4</strong> °C por hora</p>
+        </div>
+        <p id="sol-msg" aria-live="polite" style="margin-top:.9rem;font-size:.9rem;color:#3b5e63;background:rgba(220,244,255,.6);border:1px dashed rgba(120,190,230,.7);border-radius:12px;padding:.7rem 1rem"></p>
+
+        <script>
+        (function(){
+          var s=document.getElementById('sol-s'), a=document.getElementById('sol-a');
+          if(!s) return;
+          function upd(){
+            var sol=+s.value, ang=+a.value;
+            document.getElementById('sol-s-out').textContent=sol+'%';
+            document.getElementById('sol-a-out').textContent=ang+'°';
+            document.getElementById('sol-nuvem').style.opacity=(1-sol/100).toFixed(2);
+            document.getElementById('sol-raios').style.opacity=(sol/100).toFixed(2);
+            document.getElementById('sol-painel').setAttribute('transform','rotate('+(-(ang))+ ' 260 150)');
+            var fator=Math.max(0,Math.cos((ang-30)*Math.PI/180));
+            var eff=Math.round((sol/100)*fator*100);
+            document.getElementById('sol-eff').textContent=eff;
+            document.getElementById('sol-aq').textContent=(eff*0.03).toFixed(1).replace('.',',');
+            document.getElementById('sol-msg').textContent =
+              eff>75 ? '🌞 Dia ensolarado + ângulo perfeito (≈30°): o Sol faz o trabalho pesado — economia máxima de energia!' :
+              eff>40 ? '⛅ Dá pra aproveitar bem o sol, mas dá pra melhorar o ângulo ou esperar as nuvens passarem.' :
+              '☁️ Pouco sol ou ângulo ruim: o coletor rende pouco — ainda bem que a automação evita desperdício!';
+          }
+          s.addEventListener('input',upd); a.addEventListener('input',upd); upd();
+        })();
+        </script>
+      </div>
+    </div>
+  </section>
   <!-- ══════════════ JARDIM INTERATIVO ══════════════ -->
   <section class="section" id="jardim-sec" style="padding-top:0">
     <div class="wrap">
