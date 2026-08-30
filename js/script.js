@@ -1,27 +1,28 @@
 /* =========================================================
-   Aqua+ · script.js COMPLETO (versão "tudo animado")
+   Aqua+ · script.js COMPLETO (Frutiger Aero)
    Menu · reveal · contadores · OLED · simulador · calculadora
-   + NOVO: barra de progresso · bolhas · tilt 3D · voltar ao topo
-   + fluxo interativo · linha do tempo com progresso · checklist
-   com carimbo · código "digitando" · confete na equipe · stats pulso
+   barra de progresso · bolhas · tilt · voltar ao topo · fluxo
+   timeline · carimbos · código digitando · confete
+   + MUNDO AERO: peixinhos dourados e bolhas no fundo 🫧
    ========================================================= */
 document.addEventListener('DOMContentLoaded', () => {
   const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const podeHover = matchMedia('(hover:hover)').matches;
 
-  /* ---------- estilos injetados (não precisa mexer no CSS) ---------- */
+  /* ---------- estilos injetados ---------- */
   const st = document.createElement('style');
   st.textContent = `
-    #barra-progresso{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#1fc2ce,#ff8a3d);width:0;z-index:60}
-    #voltar-topo{position:fixed;right:18px;bottom:18px;width:48px;height:48px;border-radius:50%;border:0;background:#0f8b98;color:#fff;font-size:1.2rem;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;z-index:55;box-shadow:0 8px 20px rgba(4,51,58,.3)}
+    #barra-progresso{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#2fa8e6,#7ed437);width:0;z-index:60}
+    #voltar-topo{position:fixed;right:18px;bottom:18px;width:48px;height:48px;border-radius:50%;border:1px solid #fff;background:linear-gradient(180deg,#9fe0ff,#2fa8e6);color:#fff;font-size:1.2rem;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;z-index:55;box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 8px 20px rgba(20,110,170,.35)}
     #voltar-topo.mostrar{opacity:1;pointer-events:auto}
-    #voltar-topo:hover{background:#1fc2ce;transform:translateY(-3px)}
-    .bolha{position:absolute;bottom:-40px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.5),rgba(157,238,243,.12));animation:subir linear infinite;pointer-events:none;z-index:0}
+    .bolha{position:absolute;bottom:-40px;border-radius:50%;pointer-events:none;z-index:0;
+      background:radial-gradient(circle at 32% 30%,rgba(255,255,255,.95),rgba(255,255,255,.2) 42%,rgba(120,200,255,.15) 60%,rgba(255,255,255,.4));
+      border:1px solid rgba(255,255,255,.55);animation:subir linear infinite}
     @keyframes subir{to{transform:translateY(-115vh)}}
     .flow-node{transition:all .3s}
-    .flow-node.ativo{border-color:#1fc2ce;box-shadow:0 0 0 4px rgba(31,194,206,.25),0 12px 30px rgba(4,51,58,.18);transform:translateY(-4px)}
-    #pulso-fluxo{position:fixed;width:16px;height:16px;border-radius:50%;background:#1fc2ce;box-shadow:0 0 16px #1fc2ce;z-index:70;pointer-events:none;transition:left .6s ease,top .6s ease}
-    .tl-progresso{position:absolute;left:14px;top:10px;width:2px;background:linear-gradient(#9deef3,#ff8a3d);z-index:1}
+    .flow-node.ativo{border-color:#2fa8e6;box-shadow:0 0 0 4px rgba(47,168,230,.25),0 12px 30px rgba(20,110,170,.2);transform:translateY(-4px)}
+    #pulso-fluxo{position:fixed;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff,#2fa8e6 70%);box-shadow:0 0 16px #2fa8e6;z-index:70;pointer-events:none;transition:left .6s ease,top .6s ease}
+    .tl-progresso{position:absolute;left:14px;top:10px;width:3px;background:linear-gradient(#2fa8e6,#7ed437);z-index:1;border-radius:9px}
     .checklist li .ok{transform:scale(0)}
     .checklist li.visivel .ok,.checklist li.carimbo .ok{transform:scale(1);transition:transform .45s cubic-bezier(.2,1.6,.4,1)}
     .codigo.digitando pre{animation:revelar 2.4s steps(45) forwards}
@@ -113,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     nums.forEach(n => io2.observe(n));
   }
 
-  /* ---------- stats pulso ao clicar ---------- */
+  /* ---------- stats pulso ---------- */
   document.querySelectorAll('.stat').forEach(s => s.addEventListener('click', () => {
     s.classList.remove('pulso'); void s.offsetWidth; s.classList.add('pulso');
   }));
@@ -128,16 +129,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1600);
   }
 
-  /* ---------- FLUXO interativo (Robótica) ---------- */
+  /* ---------- fluxo interativo (Robótica) ---------- */
   const flow = document.querySelector('.flow');
   if (flow) {
     const nos = [...flow.querySelectorAll('.flow-node')];
     const btn = document.createElement('button');
     btn.textContent = '▶ Executar ciclo completo';
-    btn.style.cssText = 'margin:1.5rem auto 0;display:block;padding:.75rem 1.5rem;border-radius:999px;border:0;background:#0f8b98;color:#fff;font-weight:700;cursor:pointer;font-size:.95rem';
+    btn.style.cssText = 'margin:1.5rem auto 0;display:block;padding:.75rem 1.5rem;border-radius:999px;border:1px solid #1b8ec9;background:linear-gradient(180deg,#c9f0ff,#2fa8e6);color:#04466c;font-weight:800;cursor:pointer;font-size:.95rem;box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 4px 12px rgba(20,120,190,.35)';
     const msg = document.createElement('p');
     msg.setAttribute('aria-live', 'polite');
-    msg.style.cssText = 'text-align:center;margin-top:.9rem;font-family:var(--mono);font-size:.85rem;color:#0f8b98;min-height:1.4em';
+    msg.style.cssText = 'text-align:center;margin-top:.9rem;font-family:var(--mono);font-size:.85rem;color:#0a78b8;min-height:1.4em';
     flow.after(msg, btn);
     const pulso = document.createElement('div'); pulso.id = 'pulso-fluxo'; document.body.appendChild(pulso);
     pulso.style.left = '-100px';
@@ -170,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- linha do tempo com progresso (Desenvolvimento) ---------- */
+  /* ---------- linha do tempo com progresso ---------- */
   const tl = document.querySelector('.timeline');
   if (tl) {
     const prog = document.createElement('div'); prog.className = 'tl-progresso'; tl.appendChild(prog);
@@ -181,13 +182,13 @@ document.addEventListener('DOMContentLoaded', () => {
     addEventListener('scroll', att, { passive: true }); att();
   }
 
-  /* ---------- checklist com carimbo (Resultados) ---------- */
+  /* ---------- checklist com carimbo ---------- */
   const ioC = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('carimbo'); ioC.unobserve(e.target); }
   }), { threshold: .5 });
   document.querySelectorAll('.checklist li').forEach(li => ioC.observe(li));
 
-  /* ---------- código "digitando" (Programação) ---------- */
+  /* ---------- código digitando ---------- */
   const cod = document.querySelector('.codigo');
   if (cod) new IntersectionObserver((es, io) => es.forEach(e => {
     if (e.isIntersecting) { cod.classList.add('digitando'); io.disconnect(); }
@@ -198,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
     card.style.cursor = 'pointer';
     card.title = 'Clique! 🎉';
     card.addEventListener('click', e => {
-      const em = ['💧', '✨', '🎉', '💙', ''];
+      const em = ['💧', '✨', '🎉', '', '🫧'];
       for (let i = 0; i < 14; i++) {
         const s = document.createElement('span');
         s.className = 'confete'; s.textContent = em[i % em.length];
@@ -252,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
     render();
   }
 
-  /* ---------- calculadora Q = m·c·ΔT (Tecnociência) ---------- */
+  /* ---------- calculadora Q = m·c·ΔT ---------- */
   const cVol = document.getElementById('calc-vol');
   if (cVol) {
     const cDt = document.getElementById('calc-dt');
@@ -270,8 +271,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const ano = document.getElementById('ano');
   if (ano) ano.textContent = new Date().getFullYear();
 });
-/* ---------- Mundo Aero: peixinhos e bolhas no fundo da tela ---------- */
-(function(){
+
+/* =========================================================
+   🐠 MUNDO AERO — peixinhos dourados e bolhas no fundo
+   (fora do DOMContentLoaded: roda mesmo se algo acima falhar)
+   ========================================================= */
+(function () {
   if (document.getElementById('mundo-aero')) return;
   const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -298,31 +303,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const mundo = document.createElement('div');
   mundo.id = 'mundo-aero';
   document.body.appendChild(mundo);
-  if (reduzido) return; // respeita quem prefere menos movimento
 
-  /* peixinhos (🐟 vira dourado com o filtro) */
-  const peixes = ['🐠', '🐟', '', '', '🐟', '🐠', ''];
-  peixes.forEach(function(e, i){
+  const peixes = ['🐠', '', '', '🐡', '🐟', '', ''];
+  peixes.forEach(function (e, i) {
     const p = document.createElement('span');
     p.className = 'peixe' + (i % 2 ? ' esq' : '') + (e === '🐟' ? ' dourado' : '');
     p.innerHTML = '<span>' + e + '</span>';
-    p.style.top = (58 + Math.random() * 32) + '%';   // parte de baixo da tela
+    p.style.top = (58 + Math.random() * 32) + '%';
     p.style.fontSize = (20 + Math.random() * 24) + 'px';
-    p.style.animationDuration = (24 + Math.random() * 26) + 's';
-    p.style.animationDelay = (-Math.random() * 40) + 's'; // já nascem espalhados
-    p.querySelector('span').style.animationDelay = (-Math.random() * 3) + 's';
+    if (reduzido) {
+      p.style.animation = 'none';
+      p.querySelector('span').style.animation = 'none';
+      p.style.left = (5 + Math.random() * 85) + '%';
+    } else {
+      p.style.animationDuration = (24 + Math.random() * 26) + 's';
+      p.style.animationDelay = (-Math.random() * 40) + 's';
+      p.querySelector('span').style.animationDelay = (-Math.random() * 3) + 's';
+    }
     mundo.appendChild(p);
   });
 
-  /* bolhas subindo */
   for (let i = 0; i < 14; i++) {
     const b = document.createElement('span');
     b.className = 'bolha-f';
     const s = 6 + Math.random() * 16;
     b.style.width = b.style.height = s + 'px';
+    if (reduzido) {
+      b.style.animation = 'none';
+      b.style.bottom = (Math.random() * 80) + '%';
+    } else {
+      b.style.animationDuration = (9 + Math.random() * 10) + 's';
+      b.style.animationDelay = (-Math.random() * 12) + 's';
+    }
     b.style.left = Math.random() * 100 + '%';
-    b.style.animationDuration = (9 + Math.random() * 10) + 's';
-    b.style.animationDelay = (-Math.random() * 12) + 's';
     mundo.appendChild(b);
   }
 })();
