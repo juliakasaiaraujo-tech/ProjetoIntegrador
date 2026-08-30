@@ -283,6 +283,79 @@ Adafruit_SSD1306 display(<span class="num">128</span>, <span class="num">32</spa
       </div>
     </div>
   </section>
+    <!-- ══════════════ MONITOR SERIAL + CONTROLE REMOTO ══════════════ -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="card reveal" style="grid-column:1/-1">
+        <h3>🖥️ Monitor Serial + controle remoto virtual</h3>
+        <p style="color:#3b5e63;font-size:.94rem;margin:.4rem 0 1.2rem">
+          Igual ao projeto do PDF: digite o nome de uma cor no “terminal” e o Arduino (virtual) acende o LED.
+          Ou use o controle remoto com efeitos <strong>Flash</strong> e <strong>Fade</strong>.
+        </p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start" class="ser-grid">
+          <style>@media(max-width:880px){.ser-grid{grid-template-columns:1fr!important}}</style>
+          <div>
+            <div id="ser-tela" style="height:190px;overflow:hidden;background:linear-gradient(180deg,#062733,#04141d);border:1px solid rgba(160,220,255,.4);border-radius:14px;padding:.9rem 1rem;font-family:var(--mono);font-size:.8rem;color:#9ff0b0;box-shadow:0 0 0 5px rgba(255,255,255,.25)"></div>
+            <input id="ser-in" placeholder='Digite uma cor e aperte Enter (ex.: "amarelo")'
+              style="width:100%;margin-top:.8rem;padding:.75rem .9rem;border-radius:12px;border:1.5px solid rgba(120,190,230,.7);background:rgba(255,255,255,.85);font-family:var(--mono);font-size:.9rem;color:#045a8c">
+            <p style="font-size:.78rem;color:#39677f;margin-top:.6rem">Cores aceitas: vermelho, verde, azul, amarelo, ciano, magenta, laranja, roxo e branco.</p>
+          </div>
+          <div style="text-align:center">
+            <div id="ser-led" style="width:120px;height:120px;border-radius:50%;margin:0 auto;background:#222;box-shadow:0 0 0 6px rgba(255,255,255,.4);transition:background .3s"></div>
+            <p id="ser-val" style="font-family:var(--mono);font-size:.85rem;color:#045a8c;margin-top:.8rem">R 0 · G 0 · B 0</p>
+            <div style="display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1rem">
+              <button data-cor="vermelho" style="padding:.45rem .8rem;border-radius:999px;border:1px solid #fff;background:#e33;color:#fff;font-weight:800;cursor:pointer">Vermelho</button>
+              <button data-cor="verde" style="padding:.45rem .8rem;border-radius:999px;border:1px solid #fff;background:#3a3;color:#fff;font-weight:800;cursor:pointer">Verde</button>
+              <button data-cor="azul" style="padding:.45rem .8rem;border-radius:999px;border:1px solid #fff;background:#28c;color:#fff;font-weight:800;cursor:pointer">Azul</button>
+              <button data-cor="amarelo" style="padding:.45rem .8rem;border-radius:999px;border:1px solid #bbb;background:#fe3;color:#554400;font-weight:800;cursor:pointer">Amarelo</button>
+              <button data-cor="branco" style="padding:.45rem .8rem;border-radius:999px;border:1px solid #bbb;background:#fff;color:#333;font-weight:800;cursor:pointer">Branco</button>
+              <button id="ser-flash" style="padding:.45rem .8rem;border-radius:999px;border:1px solid #1b8ec9;background:linear-gradient(180deg,#c9f0ff,#2fa8e6);color:#04466c;font-weight:800;cursor:pointer">⚡ Flash</button>
+              <button id="ser-fade" style="padding:.45rem .8rem;border-radius:999px;border:1px solid #4aa30c;background:linear-gradient(180deg,#e2fbc0,#59c214);color:#1c5a00;font-weight:800;cursor:pointer">🌅 Fade</button>
+            </div>
+          </div>
+        </div>
+
+        <script>
+        (function(){
+          var tela=document.getElementById('ser-tela'); if(!tela) return;
+          var led=document.getElementById('ser-led'), val=document.getElementById('ser-val'),
+              inp=document.getElementById('ser-in'), atual=[0,0,0], ocupado=false;
+          var CORES={vermelho:[255,0,0],verde:[0,255,0],azul:[0,0,255],amarelo:[255,255,0],
+                     ciano:[0,255,255],magenta:[255,0,255],laranja:[255,165,0],roxo:[128,0,128],branco:[255,255,255]};
+          function log(t){ var d=document.createElement('div'); d.textContent=t; tela.appendChild(d);
+            while(tela.children.length>8) tela.removeChild(tela.firstChild); }
+          function pinta(rgb){ atual=rgb;
+            led.style.background='radial-gradient(circle at 35% 30%, rgba(255,255,255,.5), rgba(255,255,255,0) 45%), rgb('+rgb.join(',')+')';
+            led.style.boxShadow='0 0 60px rgba('+rgb.join(',')+',.8), 0 0 0 6px rgba(255,255,255,.4)';
+            val.textContent='R '+rgb[0]+' · G '+rgb[1]+' · B '+rgb[2]; }
+          function aplica(nome){ var rgb=CORES[nome];
+            log('> recebido: "'+nome+'"');
+            log('  analogWrite(11,'+rgb[0]+'); analogWrite(10,'+rgb[1]+'); analogWrite(9,'+rgb[2]+');');
+            pinta(rgb); }
+          log('Serial.begin(9600) ✓'); log('Aguardando cor…');
+          function norm(t){ return t.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+          inp.addEventListener('keydown',function(e){ if(e.key!=='Enter')return;
+            var n=norm(inp.value); inp.value='';
+            if(CORES[n]) aplica(n);
+            else { log('> "'+n+'" → cor desconhecida 😅'); log('  tente: vermelho, azul, branco…'); } });
+          document.querySelectorAll('[data-cor]').forEach(function(b){
+            b.addEventListener('click',function(){ aplica(b.dataset.cor); }); });
+          document.getElementById('ser-flash').addEventListener('click',function(){
+            if(ocupado)return; ocupado=true; log('> efeito: FLASH'); var n=0;
+            var t=setInterval(function(){ n++;
+              pinta(n%2?[255,255,255]:[0,0,0]);
+              if(n>=8){clearInterval(t);pinta(atual===[0,0,0]?[255,255,255]:atual);ocupado=false;} },160); });
+          document.getElementById('ser-fade').addEventListener('click',function(){
+            if(ocupado)return; ocupado=true; log('> efeito: FADE');
+            var alvo=(atual[0]+atual[1]+atual[2]===0)?[255,165,0]:atual, f=0, subindo=true;
+            var t=setInterval(function(){
+              f+=subindo?0.05:-0.05; if(f>=1){f=1;subindo=false;} if(f<=0){f=0;clearInterval(t);ocupado=false;}
+              pinta([Math.round(alvo[0]*f),Math.round(alvo[1]*f),Math.round(alvo[2]*f)]); },40); });
+        })();
+        </script>
+      </div>
+    </div>
+  </section>
   <!-- ALÉM DO ARDUINO -->
   <section class="section" id="alem" style="padding-top:0">
     <div class="wrap">
