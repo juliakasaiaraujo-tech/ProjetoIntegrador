@@ -238,7 +238,115 @@
       </div>
     </div>
   </section>
+  <!-- ══════════════ CAÇA AOS BUGS + TESTES FINAIS ══════════════ -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="grid g2">
 
+        <!-- CAÇA AOS BUGS -->
+        <div class="card reveal">
+          <h3>🐞 Caça aos bugs (Etapa 3)</h3>
+          <p style="color:#3b5e63;font-size:.94rem;margin:.4rem 0 1rem">
+            O código veio da Etapa 2 com <strong>3 erros</strong>. Clique em cada linha com bug para corrigir!
+          </p>
+          <div style="display:grid;gap:.6rem;font-family:var(--mono);font-size:.8rem">
+            <button class="bugline" data-ok="int ALVO = 30;" style="text-align:left;padding:.7rem .9rem;border-radius:10px;border:1px solid rgba(220,120,60,.5);background:rgba(255,230,210,.6);color:#7a3c00;cursor:pointer">int ALVO = 300;  🐞 <em style="font-family:var(--corpo);font-size:.72rem">(dica: 300 °C evaporaria a piscina!)</em></button>
+            <button class="bugline" data-ok="if (t &lt; ALVO) { ligarAquecedor(); }" style="text-align:left;padding:.7rem .9rem;border-radius:10px;border:1px solid rgba(220,120,60,.5);background:rgba(255,230,210,.6);color:#7a3c00;cursor:pointer">if (t &gt; ALVO) { ligarAquecedor(); }  🐞 <em style="font-family:var(--corpo);font-size:.72rem">(dica: aquece quando está ABAIXO do alvo)</em></button>
+            <button class="bugline" data-ok="pinMode(PIN_RELE, OUTPUT);" style="text-align:left;padding:.7rem .9rem;border-radius:10px;border:1px solid rgba(220,120,60,.5);background:rgba(255,230,210,.6);color:#7a3c00;cursor:pointer">pinMode(PIN_RELE, INPUT);  🐞 <em style="font-family:var(--corpo);font-size:.72rem">(dica: o relé precisa RECEBER comandos)</em></button>
+          </div>
+          <p id="bug-placar" style="margin-top:.9rem;font-weight:800;color:#045a8c">Bugs corrigidos: 0/3</p>
+          <p id="bug-fim" hidden style="margin-top:.5rem;font-size:.9rem;color:#1c5a00;background:rgba(226,251,192,.7);border:1px dashed #4aa30c;border-radius:12px;padding:.7rem 1rem">
+            🎉 Código estável! Sensores calibrados e relé obedecendo — caminho livre para a Etapa 4.
+          </p>
+          <script>
+          (function(){
+            var linhas=document.querySelectorAll('.bugline'); if(!linhas.length) return;
+            var fixos=0;
+            linhas.forEach(function(b){
+              b.addEventListener('click',function(){
+                if(b.classList.contains('ok')) return;
+                b.classList.add('ok');
+                b.innerHTML=b.dataset.ok+'  ✅';
+                b.style.border='1px solid #4aa30c';
+                b.style.background='rgba(226,251,192,.7)';
+                b.style.color='#1c5a00';
+                fixos++;
+                document.getElementById('bug-placar').textContent='Bugs corrigidos: '+fixos+'/3';
+                if(fixos===3) document.getElementById('bug-fim').hidden=false;
+              });
+            });
+          })();
+          </script>
+        </div>
+
+        <!-- PAINEL DE TESTES FINAIS -->
+        <div class="card reveal">
+          <h3>🏁 Painel de testes finais (Etapa 4)</h3>
+          <p style="color:#3b5e63;font-size:.94rem;margin:.4rem 0 1rem">
+            Execute os quatro testes realizados pela equipe na versão final:
+          </p>
+          <div id="tes-banco" style="height:96px;border-radius:14px;border:1px solid rgba(255,255,255,.8);background:linear-gradient(180deg,#062733,#04141d);display:flex;align-items:center;justify-content:center;gap:.8rem;font-size:1.8rem;position:relative;overflow:hidden;box-shadow:0 0 0 5px rgba(255,255,255,.25)">🏁</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem">
+            <button data-tes="aq" style="padding:.5rem .9rem;border-radius:999px;border:1px solid #b35b00;background:linear-gradient(180deg,#ffe9c0,#ff9a2e);color:#7a3c00;font-weight:800;cursor:pointer">🔥 Aquecimento</button>
+            <button data-tes="ac" style="padding:.5rem .9rem;border-radius:999px;border:1px solid #4aa30c;background:linear-gradient(180deg,#e2fbc0,#59c214);color:#1c5a00;font-weight:800;cursor:pointer">🦽 Acessibilidade</button>
+            <button data-tes="in" style="padding:.5rem .9rem;border-radius:999px;border:1px solid #1b8ec9;background:linear-gradient(180deg,#c9f0ff,#2fa8e6);color:#04466c;font-weight:800;cursor:pointer">🔗 Integração</button>
+            <button data-tes="du" style="padding:.5rem .9rem;border-radius:999px;border:1px solid #0a78b8;background:linear-gradient(180deg,#d9f6f8,#39c4f0);color:#04466c;font-weight:800;cursor:pointer">💧 Durabilidade</button>
+          </div>
+          <p id="tes-msg" aria-live="polite" style="margin-top:.9rem;font-size:.88rem;color:#3b5e63;min-height:2.4em"></p>
+          <script>
+          (function(){
+            var banco=document.getElementById('tes-banco'); if(!banco) return;
+            var msg=document.getElementById('tes-msg');
+            function roda(t,btn){
+              banco.innerHTML='';
+              if(t=='aq'){
+                var s=document.createElement('span'); s.textContent='🌡️';
+                var v=document.createElement('b'); v.style.cssText='font-size:1.1rem;color:#9deef3;font-family:var(--mono)';
+                banco.append(s,v);
+                var t0=performance.now();
+                (function f(now){ var p=Math.min(1,(now-t0)/1800);
+                  v.textContent=(20+10*p).toFixed(1)+' °C';
+                  if(p<1) requestAnimationFrame(f); })(t0);
+                msg.textContent='🔥 Teste de aquecimento: eficiência térmica verificada ✓';
+              }
+              if(t=='ac'){
+                var r=document.createElement('span'); r.textContent='🦽'; r.style.position='absolute';
+                banco.appendChild(r);
+                r.animate([{left:'6%'},{left:'82%'}],{duration:2200,easing:'ease-in-out'});
+                msg.textContent='🦽 Teste de acessibilidade: rampa funciona com segurança ✓';
+              }
+              if(t=='in'){
+                ['📡','','⚙️'].forEach(function(e,i){
+                  var s=document.createElement('span'); s.textContent=e; s.style.opacity='.25';
+                  banco.appendChild(s);
+                  setTimeout(function(){ s.style.opacity='1'; s.style.transform='scale(1.25)';
+                    setTimeout(function(){s.style.transform='scale(1)';},250); }, i*600);
+                });
+                msg.textContent='🔗 Teste de integração: sensor → Arduino → atuadores conversando ✓';
+              }
+              if(t=='du'){
+                var m=document.createElement('span'); m.textContent='🧱'; banco.appendChild(m);
+                for(var i=0;i<4;i++){
+                  var g=document.createElement('span'); g.textContent='💧';
+                  g.style.cssText='position:absolute;top:-20px;left:'+(20+i*18)+'%';
+                  banco.appendChild(g);
+                  g.animate([{transform:'translateY(0)',opacity:1},{transform:'translateY(70px)',opacity:0}],
+                    {duration:900,delay:i*220,easing:'ease-in'});
+                }
+                msg.textContent='💧 Teste de durabilidade: materiais resistem à água ✓';
+              }
+              if(!btn.dataset.ok){ btn.dataset.ok='1'; btn.textContent=btn.textContent+' ✓'; }
+            }
+            document.querySelectorAll('[data-tes]').forEach(function(b){
+              b.addEventListener('click',function(){roda(b.dataset.tes,b);});
+            });
+          })();
+          </script>
+        </div>
+
+      </div>
+    </div>
+  </section>
   <!-- CTA -->
   <section class="section" style="padding-top:0">
     <div class="wrap">
