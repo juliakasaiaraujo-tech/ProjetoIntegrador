@@ -270,3 +270,59 @@ document.addEventListener('DOMContentLoaded', () => {
   const ano = document.getElementById('ano');
   if (ano) ano.textContent = new Date().getFullYear();
 });
+/* ---------- Mundo Aero: peixinhos e bolhas no fundo da tela ---------- */
+(function(){
+  if (document.getElementById('mundo-aero')) return;
+  const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const st = document.createElement('style');
+  st.textContent = `
+    #mundo-aero{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+    #mundo-aero .peixe{position:absolute;opacity:.9;transform:scaleX(-1);
+      filter:drop-shadow(0 3px 4px rgba(0,60,110,.25));animation:nadar linear infinite}
+    #mundo-aero .peixe.esq{transform:none;animation-name:nadar-esq}
+    #mundo-aero .peixe.dourado{filter:sepia(1) saturate(3.2) hue-rotate(-12deg) brightness(1.1)
+      drop-shadow(0 3px 4px rgba(0,60,110,.25))}
+    #mundo-aero .peixe span{display:inline-block;animation:flutuar 3s ease-in-out infinite alternate}
+    @keyframes nadar{from{left:-10%}to{left:110%}}
+    @keyframes nadar-esq{from{left:110%}to{left:-10%}}
+    @keyframes flutuar{from{transform:translateY(-6px)}to{transform:translateY(6px)}}
+    #mundo-aero .bolha-f{position:absolute;bottom:-30px;border-radius:50%;
+      background:radial-gradient(circle at 32% 30%,rgba(255,255,255,.95),rgba(255,255,255,.2) 42%,rgba(120,200,255,.15) 60%,rgba(255,255,255,.4));
+      border:1px solid rgba(255,255,255,.55);box-shadow:inset 0 0 8px rgba(255,255,255,.4);
+      animation:subir-f linear infinite}
+    @keyframes subir-f{to{transform:translateY(-110vh)}}
+  `;
+  document.head.appendChild(st);
+
+  const mundo = document.createElement('div');
+  mundo.id = 'mundo-aero';
+  document.body.appendChild(mundo);
+  if (reduzido) return; // respeita quem prefere menos movimento
+
+  /* peixinhos (🐟 vira dourado com o filtro) */
+  const peixes = ['🐠', '🐟', '', '', '🐟', '🐠', ''];
+  peixes.forEach(function(e, i){
+    const p = document.createElement('span');
+    p.className = 'peixe' + (i % 2 ? ' esq' : '') + (e === '🐟' ? ' dourado' : '');
+    p.innerHTML = '<span>' + e + '</span>';
+    p.style.top = (58 + Math.random() * 32) + '%';   // parte de baixo da tela
+    p.style.fontSize = (20 + Math.random() * 24) + 'px';
+    p.style.animationDuration = (24 + Math.random() * 26) + 's';
+    p.style.animationDelay = (-Math.random() * 40) + 's'; // já nascem espalhados
+    p.querySelector('span').style.animationDelay = (-Math.random() * 3) + 's';
+    mundo.appendChild(p);
+  });
+
+  /* bolhas subindo */
+  for (let i = 0; i < 14; i++) {
+    const b = document.createElement('span');
+    b.className = 'bolha-f';
+    const s = 6 + Math.random() * 16;
+    b.style.width = b.style.height = s + 'px';
+    b.style.left = Math.random() * 100 + '%';
+    b.style.animationDuration = (9 + Math.random() * 10) + 's';
+    b.style.animationDelay = (-Math.random() * 12) + 's';
+    mundo.appendChild(b);
+  }
+})();
