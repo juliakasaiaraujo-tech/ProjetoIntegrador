@@ -392,5 +392,44 @@
 </footer>
 
 <script src="js/script.js"></script>
+  <script>
+/* ===== PATCH: fumacinha da piscina (funciona em PC e celular) ===== */
+(function(){
+  var slider=document.getElementById('pis-temp');
+  var agua=document.getElementById('pis-agua');
+  if(!slider||!agua) return;
+  var host=agua.parentNode, vapores=[], pronto=false;
+
+  function cria(){
+    [30,52,72].forEach(function(L,i){
+      var s=document.createElement('span');
+      s.textContent='♨️';
+      s.style.cssText='position:absolute;bottom:162px;left:'+L+'%;font-size:1.6rem;opacity:0;pointer-events:none;z-index:3';
+      host.appendChild(s);
+      /* sobe da água e some no ar — animação via WAAPI (não depende de CSS) */
+      s._anim=s.animate(
+        [{transform:'translateY(12px)',opacity:0},
+         {opacity:.95,offset:.4},
+         {transform:'translateY(-50px)',opacity:0}],
+        {duration:2400,iterations:Infinity,delay:i*650,easing:'ease-out'});
+      s._anim.cancel();           /* começa “guardada” */
+      s._off=true;
+      vapores.push(s);
+    });
+    pronto=true;
+  }
+
+  function checa(){
+    if(!pronto) cria();
+    var quente=(+slider.value)>34;
+    vapores.forEach(function(s){
+      if(quente && s._off){ s._anim.play();   s._off=false; }
+      if(!quente && !s._off){ s._anim.cancel(); s._off=true; }
+    });
+  }
+  setInterval(checa,400);          /* pega também as mudanças pelos botões 🔥/❄️ */
+  slider.addEventListener('input',checa);
+})();
+</script>
 </body>
 </html>
